@@ -176,19 +176,24 @@ import_sql_file() {
   # Import como root → evita faltantes de TRIGGER privilege en el user app
   # (el app user sigue siendo DB_USER para la API).
   enable_trigger_creators || warn "Continuando import; si falla ERROR 1419, aplicá el SET GLOBAL a mano y reintentá con RECREATE_DB=true"
-  sed -E \
+  local errf="/tmp/brabo-sql-import.err"
+  : >"$errf"
+  # shellcheck disable=SC2094
+  if ! sed -E \
     -e 's/USE[[:space:]]+`?mfcomputers`?/USE `'"${DB_NAME}"'`/Ig' \
     -e 's/USE[[:space:]]+`?brabo_tabacos`?/USE `'"${DB_NAME}"'`/Ig' \
     -e 's/USE[[:space:]]+`[^`]+`/USE `'"${DB_NAME}"'`/Ig' \
-    "$file" | mysql_root --database="$DB_NAME" --force 2> >(tee /tmp/brabo-sql-import.err >&2) \
-    || true
-  if rg -q "ERROR 1419|HY000" /tmp/brabo-sql-import.err 2>/dev/null; then
+    "$file" | mysql_root "$DB_NAME" 2>"$errf"; then
+    cat "$errf" >&2 || true
+  fi
+  if grep -Eqi 'ERROR 1419|log_bin_trust_function_creators' "$errf" 2>/dev/null; then
     die "Import falló con ERROR 1419 (triggers/binlog). Como root MySQL: SET GLOBAL log_bin_trust_function_creators = 1; luego: RECREATE_DB=true sudo -E bash scripts/bootstrap-prod.sh"
   fi
-  if rg -q "^ERROR " /tmp/brabo-sql-import.err 2>/dev/null; then
-    warn "Hubo errores SQL durante el import — revisá /tmp/brabo-sql-import.err"
+  if grep -Eq '^ERROR ' "$errf" 2>/dev/null; then
+    warn "Hubo errores SQL durante el import — revisá $errf"
+    cat "$errf" >&2 || true
     if [[ "$(db_table_count)" -lt 5 ]]; then
-      die "BD quedó casi vacía tras import. Revisá errores y reintentá."
+      die "BD quedó casi vacía tras import. Revisá errores y reintentá con RECREATE_DB=true."
     fi
   fi
 }
