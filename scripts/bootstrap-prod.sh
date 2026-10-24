@@ -18,6 +18,7 @@ APP_NAME="${APP_NAME:-brabo-tabacos-api}"
 APP_DIR="${APP_DIR:-/var/www/brabo-tabacos-api}"
 GIT_URL="${GIT_URL:-https://github.com/fertadeo/Brabo-tabacos-api.git}"
 GIT_BRANCH="${GIT_BRANCH:-main}"
+# Regla producto Fenec: cada cliente = PORT distinto. 8086 = MF Computers (no reutilizar).
 PORT="${PORT:-8087}"
 DOMAIN="${DOMAIN:-}"
 NODE_MAJOR="${NODE_MAJOR:-20}"
@@ -83,8 +84,15 @@ assert_safe_db() {
 
 rand_hex() { openssl rand -hex 24 2>/dev/null || head -c 48 /dev/urandom | xxd -p | tr -d '\n' | head -c 48; }
 
+assert_safe_port() {
+  if [[ "$PORT" == "8086" ]]; then
+    die "PORT=8086 está reservado a MF Computers. Usá otro (Brabo default 8087). Regla: cada cliente = un PORT distinto."
+  fi
+}
+
 ensure_vars() {
   assert_safe_db
+  assert_safe_port
   if [[ -z "$DB_PASSWORD" ]]; then
     DB_PASSWORD="$(rand_hex)"
     warn "DB_PASSWORD no seteado → generado (guardado en $APP_DIR/.env)"

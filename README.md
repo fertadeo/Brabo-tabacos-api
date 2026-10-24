@@ -37,7 +37,7 @@ El script es **idempotente**: deps (Node 20, MariaDB, PM2, nginx opcional), clon
 | `APP_DIR` | `/var/www/brabo-tabacos-api` | |
 | `GIT_URL` | este repo | |
 | `GIT_BRANCH` | `main` | |
-| `PORT` | `8087` | |
+| `PORT` | `8087` | **Nunca 8086** (MF). Cada cliente nuevo = otro PORT |
 | `DOMAIN` | vacío | si se setea, configura nginx :80 |
 | `DB_NAME` | `brabo_tabacos` | rechaza nombres tipo `mfcomputers` |
 | `DB_USER` / `DB_PASSWORD` | `brabo` / (generado) | |
