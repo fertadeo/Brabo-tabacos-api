@@ -169,7 +169,7 @@ app.use((req, res, next) => {
 app.get('/health', (req, res) => {
   res.status(200).json({
     status: 'OK',
-    message: 'MF Computers API is running',
+    message: 'Brabo Tabacos API is running',
     timestamp: new Date().toISOString(),
     port: PORT
   });
@@ -270,7 +270,7 @@ const startServer = async () => {
     }
 
     app.listen(PORT, () => {
-      console.log(`🚀 MF Computers API Server running on port ${PORT}`);
+      console.log(`🚀 Brabo Tabacos API Server running on port ${PORT}`);
       console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`🔗 Health check: http://localhost:${PORT}/health`);
       console.log(`📡 API endpoint: http://localhost:${PORT}/api`);
