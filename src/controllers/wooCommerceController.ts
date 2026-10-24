@@ -51,8 +51,8 @@ export class WooCommerceController {
         date_created: product.created_at,
         date_modified: product.updated_at,
         meta_data: [
-          { key: '_mfcomputers_erp_id', value: product.id.toString() },
-          { key: '_mfcomputers_erp_code', value: product.code }
+          { key: '_brabo_erp_id', value: product.id.toString() },
+          { key: '_brabo_erp_code', value: product.code }
         ]
       }));
       

@@ -3,8 +3,8 @@ import { detectArcaInvoiceDocument, parseArcaInvoicePdfText } from './ArcaInvoic
 
 const SAMPLE_FACTURA_B = `
 ORIGINAL
-MF COMPUTERS
-Razón Social: MF COMPUTERS SRL
+BRABO TABACOS
+Razón Social: BRABO TABACOS SRL
 Domicilio Comercial: Av. Siempre Viva 123
 Condición frente al IVA: IVA Responsable Inscripto
 FACTURA B
@@ -29,7 +29,7 @@ const SAMPLE_STACKED_JSPDF = `
 Punto de Venta: 00005
 Comp. Nro: 00000006
 Fecha de Emisión: 09/06/2026
-Razón Social: MF COMPUTERS SRL
+Razón Social: BRABO TABACOS SRL
 CUIT: 30-71234567-8
 Apellido y Nombre / Razón Social: Consumidor Final
 CUIT: 20-00000000-0

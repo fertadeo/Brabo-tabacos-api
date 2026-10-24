@@ -20,9 +20,12 @@ export class WooCommerceService {
     this.wpUser = process.env.WP_APPLICATION_USER || '';
     this.wpApplicationPassword = process.env.WP_APPLICATION_PASSWORD || '';
 
-    // Validar que las credenciales estén configuradas
-    if (!this.baseUrl || !this.consumerKey || !this.consumerSecret) {
-      console.warn('[WooCommerceService] ⚠️ Credenciales de WooCommerce no configuradas. La sincronización no funcionará.');
+    // Solo advertir si Woo está explícitamente habilitado (Brabo retail: off por default)
+    const wooOn = ['1', 'true', 'yes', 'on'].includes(
+      String(process.env.FEATURE_WOOCOMMERCE || '').trim().toLowerCase()
+    );
+    if (wooOn && (!this.baseUrl || !this.consumerKey || !this.consumerSecret)) {
+      console.warn('[WooCommerceService] FEATURE_WOOCOMMERCE=on pero faltan credenciales.');
     }
   }
 

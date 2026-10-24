@@ -90,7 +90,7 @@ export const authenticateApiKey = async (req: AuthenticatedRequest, res: Respons
   }
 
   // Fallback: validar contra variable de entorno (compatibilidad hacia atrás)
-  const expectedApiKey = process.env.API_KEY || 'mfcomputers-api-key-2024';
+  const expectedApiKey = process.env.API_KEY || 'brabo-api-key-change-me';
 
   if (apiKey !== expectedApiKey) {
     const response: ApiResponse = {
@@ -117,8 +117,8 @@ export const authenticateWebhook = async (req: AuthenticatedRequest, res: Respon
   // Express normaliza headers a minúsculas, pero intentar múltiples variantes por si acaso
   const webhookSecret = (req.headers['x-webhook-secret'] || req.headers['X-Webhook-Secret'] || req.headers['X-WEBHOOK-SECRET']) as string;
   const apiKey = (req.headers['x-api-key'] || req.headers['X-API-Key'] || req.headers['X-API-KEY']) as string;
-  const expectedSecret = process.env.WEBHOOK_SECRET || 'mf-wooc-secret';
-  const expectedApiKey = process.env.API_KEY || 'mfcomputers-api-key-2024';
+  const expectedSecret = process.env.WEBHOOK_SECRET || 'brabo-webhook-secret-change-me';
+  const expectedApiKey = process.env.API_KEY || 'brabo-api-key-change-me';
 
   // Log de todas las requests que lleguen al webhook (para debugging)
   console.log(`[WEBHOOK-AUTH] Request recibida en: ${req.method} ${req.path}`);
@@ -259,7 +259,7 @@ export const optionalAuth = async (req: AuthenticatedRequest, res: Response, nex
     }
 
     // Fallback: validar contra variable de entorno
-    const expectedApiKey = process.env.API_KEY || 'mfcomputers-api-key-2024';
+    const expectedApiKey = process.env.API_KEY || 'brabo-api-key-change-me';
     if (apiKey === expectedApiKey) {
       req.user = {
         id: 'api-user',

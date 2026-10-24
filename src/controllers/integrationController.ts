@@ -21,9 +21,9 @@ export class IntegrationController {
     try {
       const response: ApiResponse = {
         success: true,
-        message: '¡Hola Mundo! Conexión exitosa con MF Computers API',
+        message: '¡Hola Mundo! Conexión exitosa con Brabo Tabacos API',
         data: {
-          api_name: 'MF Computers API',
+          api_name: 'Brabo Tabacos API',
           version: '1.0.0',
           status: 'active',
           timestamp: new Date().toISOString(),
@@ -83,11 +83,11 @@ export class IntegrationController {
         date_modified: product.updated_at,
         meta_data: [
           {
-            key: '_mfcomputers_erp_id',
+            key: '_brabo_erp_id',
             value: product.id.toString()
           },
           {
-            key: '_mfcomputers_erp_code',
+            key: '_brabo_erp_code',
             value: product.code
           }
         ]
@@ -765,7 +765,7 @@ export class IntegrationController {
         
         const result = await executeQuery(insertQuery, [
           'sistema_woocommerce',
-          'sistema@mfcomputers.com.ar',
+          'sistema@brabotabacos.local',
           passwordHash,
           'Sistema',
           'WooCommerce',
@@ -782,7 +782,7 @@ export class IntegrationController {
           console.log('Usuario ya existe, buscando nuevamente...');
           const [existingUser] = await executeQuery(
             'SELECT id FROM users WHERE username = ? OR email = ? LIMIT 1',
-            ['sistema_woocommerce', 'sistema@mfcomputers.com']
+            ['sistema_woocommerce', 'sistema@brabotabacos.local']
           );
           if (existingUser && existingUser.id) {
             return existingUser.id;

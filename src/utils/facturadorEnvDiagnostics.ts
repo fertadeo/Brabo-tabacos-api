@@ -21,6 +21,12 @@ export function logFacturadorEnvStartupOnce(): void {
   if (loggedStartupDiagnostics) return;
   loggedStartupDiagnostics = true;
 
+  // Brabo retail: no asumir facturador/CUIT de MF. Solo diagnosticar si hay URL configurada.
+  if (!(process.env.FACTURADOR_BASE_URL || '').trim()) {
+    console.log('[FacturadorEnv] Sin FACTURADOR_BASE_URL — diagnóstico omitido (OK para retail sin ARCA).');
+    return;
+  }
+
   const baseUrl = (process.env.FACTURADOR_BASE_URL || '').trim().replace(/\/+$/, '');
   const apiKey = (process.env.FACTURADOR_API_KEY || '').trim();
   const timeoutMs = Number(process.env.FACTURADOR_TIMEOUT_MS || 15000);

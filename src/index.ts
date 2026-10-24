@@ -16,19 +16,14 @@ dotenv.config();
 logFacturadorEnvStartupOnce();
 
 const app = express();
-const PORT = process.env.PORT || 8086;
+const PORT = process.env.PORT || 8087;
 
 // Middleware
 app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }
 })); // Security headers
 
-// Configuración de CORS que maneja múltiples orígenes
-const PRODUCTION_FRONTEND_ORIGINS = [
-  'http://localhost:43127',
-  'http://127.0.0.1:43127',
-];
-
+// CORS: en producción SOLO CORS_ORIGIN (sin hardcodear MF ni dominios ajenos).
 function buildAllowedOrigins(): string[] {
   const fromEnv = process.env.CORS_ORIGIN
     ? process.env.CORS_ORIGIN.split(',').map((o) => o.trim()).filter(Boolean)
@@ -36,8 +31,8 @@ function buildAllowedOrigins(): string[] {
 
   const defaults =
     process.env.NODE_ENV === 'production'
-      ? PRODUCTION_FRONTEND_ORIGINS
-      : ['http://localhost:3000'];
+      ? []
+      : ['http://localhost:43127', 'http://127.0.0.1:43127', 'http://localhost:3000'];
 
   return Array.from(new Set([...fromEnv, ...defaults]));
 }

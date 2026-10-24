@@ -1032,7 +1032,7 @@ Por tanto: **Google entra a funcionar solo cuando la búsqueda llega al Paso 3**
 
 #### Base URL
 ```
-http://localhost:8086/api/products/barcode
+http://localhost:8087/api/products/barcode
 ```
 *(Ajustar según el entorno: desarrollo, staging, producción)*
 

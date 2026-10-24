@@ -55,7 +55,7 @@ Guía para integrar el botón "Vincular productos con WooCommerce" en el módulo
 ```ts
 // services/products.ts o lib/api/products.ts
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8086';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8087';
 
 export interface LinkWoocommerceIdsResult {
   linked: number;

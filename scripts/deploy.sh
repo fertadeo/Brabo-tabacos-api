@@ -1,4 +1,7 @@
 #!/bin/bash
+echo "OBSOLETO: usá scripts/bootstrap-prod.sh (Brabo PORT 8087). Abortando."
+exit 1
+#!/bin/bash
 
 # Script de despliegue para MF Computers API
 # Uso: ./scripts/deploy.sh

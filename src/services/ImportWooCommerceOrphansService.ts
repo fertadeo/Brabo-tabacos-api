@@ -347,7 +347,7 @@ export class ImportWooCommerceOrphansService {
           woocommerce_permalink: permalink,
           woocommerce_json: {
             ...wcPayload,
-            _mfcomputers_import: {
+            _brabo_import: {
               erp_code_used: code,
               sku_was_missing: generated
             }

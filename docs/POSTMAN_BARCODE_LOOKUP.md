@@ -6,7 +6,7 @@ Primero necesitas autenticarte para obtener un token.
 
 ### Request: Login
 ```
-POST http://localhost:8086/api/auth/login
+POST http://localhost:8087/api/auth/login
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 
 **En Postman:**
 - Method: `POST`
-- URL: `http://localhost:8086/api/auth/login`
+- URL: `http://localhost:8087/api/auth/login`
 - Headers:
   - `Content-Type: application/json`
 - Body (raw JSON):
@@ -48,7 +48,7 @@ Content-Type: application/json
 
 ### Request: GET Barcode Lookup
 ```
-GET http://localhost:8086/api/products/barcode/1234567890123
+GET http://localhost:8087/api/products/barcode/1234567890123
 Authorization: Bearer <tu_token_aqui>
 ```
 
@@ -56,7 +56,7 @@ Authorization: Bearer <tu_token_aqui>
 
 #### Configuración:
 - **Method:** `GET`
-- **URL:** `http://localhost:8086/api/products/barcode/1234567890123`
+- **URL:** `http://localhost:8087/api/products/barcode/1234567890123`
 - **Headers:**
   - `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...` (reemplaza con tu token)
   - `Content-Type: application/json`
@@ -137,7 +137,7 @@ Authorization: Bearer <tu_token_aqui>
 
 ### Request: POST Accept Barcode Data
 ```
-POST http://localhost:8086/api/products/barcode/1234567890123/accept
+POST http://localhost:8087/api/products/barcode/1234567890123/accept
 Authorization: Bearer <tu_token>
 Content-Type: application/json
 
@@ -153,7 +153,7 @@ Content-Type: application/json
 
 #### Configuración:
 - **Method:** `POST`
-- **URL:** `http://localhost:8086/api/products/barcode/1234567890123/accept`
+- **URL:** `http://localhost:8087/api/products/barcode/1234567890123/accept`
 - **Headers:**
   - `Authorization: Bearer <tu_token>`
   - `Content-Type: application/json`
@@ -194,7 +194,7 @@ Content-Type: application/json
 
 ### Request: POST Create Product from Barcode
 ```
-POST http://localhost:8086/api/products/barcode/1234567890123/create
+POST http://localhost:8087/api/products/barcode/1234567890123/create
 Authorization: Bearer <tu_token>
 Content-Type: application/json
 
@@ -214,7 +214,7 @@ Content-Type: application/json
 
 #### Configuración:
 - **Method:** `POST`
-- **URL:** `http://localhost:8086/api/products/barcode/1234567890123/create`
+- **URL:** `http://localhost:8087/api/products/barcode/1234567890123/create`
 - **Headers:**
   - `Authorization: Bearer <tu_token>`
   - `Content-Type: application/json`
@@ -250,7 +250,7 @@ Content-Type: application/json
 
 ### Request: POST Ignore Barcode Data
 ```
-POST http://localhost:8086/api/products/barcode/1234567890123/ignore
+POST http://localhost:8087/api/products/barcode/1234567890123/ignore
 Authorization: Bearer <tu_token>
 ```
 
@@ -258,7 +258,7 @@ Authorization: Bearer <tu_token>
 
 #### Configuración:
 - **Method:** `POST`
-- **URL:** `http://localhost:8086/api/products/barcode/1234567890123/ignore`
+- **URL:** `http://localhost:8087/api/products/barcode/1234567890123/ignore`
 - **Headers:**
   - `Authorization: Bearer <tu_token>`
   - `Content-Type: application/json`
@@ -300,7 +300,7 @@ Puedes importar esta colección directamente en Postman:
           "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"tu_password\"\n}"
         },
         "url": {
-          "raw": "http://localhost:8086/api/auth/login",
+          "raw": "http://localhost:8087/api/auth/login",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8086",
@@ -320,7 +320,7 @@ Puedes importar esta colección directamente en Postman:
           }
         ],
         "url": {
-          "raw": "http://localhost:8086/api/products/barcode/1234567890123",
+          "raw": "http://localhost:8087/api/products/barcode/1234567890123",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8086",
@@ -347,7 +347,7 @@ Puedes importar esta colección directamente en Postman:
           "raw": "{\n  \"category_id\": 5,\n  \"price\": 1500.00,\n  \"stock\": 10,\n  \"code\": \"PROD-001\"\n}"
         },
         "url": {
-          "raw": "http://localhost:8086/api/products/barcode/1234567890123/accept",
+          "raw": "http://localhost:8087/api/products/barcode/1234567890123/accept",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8086",
@@ -374,7 +374,7 @@ Puedes importar esta colección directamente en Postman:
           "raw": "{\n  \"code\": \"PROD-001\",\n  \"name\": \"Nombre Modificado\",\n  \"description\": \"Descripción editada\",\n  \"price\": 1500.00,\n  \"stock\": 10,\n  \"category_id\": 5,\n  \"barcode\": \"1234567890123\"\n}"
         },
         "url": {
-          "raw": "http://localhost:8086/api/products/barcode/1234567890123/create",
+          "raw": "http://localhost:8087/api/products/barcode/1234567890123/create",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8086",
@@ -393,7 +393,7 @@ Puedes importar esta colección directamente en Postman:
           }
         ],
         "url": {
-          "raw": "http://localhost:8086/api/products/barcode/1234567890123/ignore",
+          "raw": "http://localhost:8087/api/products/barcode/1234567890123/ignore",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8086",

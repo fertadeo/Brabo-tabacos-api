@@ -41,7 +41,7 @@ mysql -u usuario -p nombre_bd < docs/migrations/2026-02-01_add_woocommerce_image
 **Ejemplo con `fetch` (App Router o Client Component):**
 
 ```ts
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8086';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8087';
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 async function uploadImagesToWordPress(files: File[]): Promise<{ id: number; source_url: string }[]> {

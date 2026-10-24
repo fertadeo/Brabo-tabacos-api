@@ -303,8 +303,8 @@ export class ProductService {
       images: imagesPayload,
       categories: categoriesPayload,
       meta_data: [
-        { key: '_mfcomputers_erp_id', value: String(product.id) },
-        { key: '_mfcomputers_erp_code', value: product.code }
+        { key: '_brabo_erp_id', value: String(product.id) },
+        { key: '_brabo_erp_code', value: product.code }
       ]
     };
     if ((product as any).weight != null && (product as any).weight !== '') {

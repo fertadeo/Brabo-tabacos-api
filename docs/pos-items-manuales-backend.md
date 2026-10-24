@@ -29,7 +29,7 @@ Payload al facturador incluye `detalle[]` por línea: manual usa `codigo: "0"` y
 ## Prueba curl
 
 ```bash
-curl -X POST "http://localhost:8086/api/sales" \
+curl -X POST "http://localhost:8087/api/sales" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d "{\"items\":[{\"description\":\"Servicio puntual POS\",\"quantity\":1,\"unit_price\":5000}],\"payment_method\":\"efectivo\"}"

@@ -18,7 +18,7 @@ APP_NAME="${APP_NAME:-brabo-tabacos-api}"
 APP_DIR="${APP_DIR:-/var/www/brabo-tabacos-api}"
 GIT_URL="${GIT_URL:-https://github.com/fertadeo/Brabo-tabacos-api.git}"
 GIT_BRANCH="${GIT_BRANCH:-main}"
-PORT="${PORT:-8086}"
+PORT="${PORT:-8087}"
 DOMAIN="${DOMAIN:-}"
 NODE_MAJOR="${NODE_MAJOR:-20}"
 
@@ -56,7 +56,6 @@ need_root() {
   # Brabo debe vivir en el PM2 de root: sudo pm2 list
   export HOME=/root
   export PM2_HOME=/root/.pm2
-  export npm_config_prefix="${npm_config_prefix:-/usr/lib/node_modules}"
 }
 
 # Siempre el PM2 de root (daemon + dump en /root/.pm2)
@@ -453,6 +452,7 @@ healthcheck() {
       echo "Admin mock: admin / (ver ADMIN_PASSWORD en .env)"
       echo "Cambiá ADMIN_PASSWORD y JWT_SECRET en producción real."
       echo "Fenec Admin: registrar instancia después (otro workstream)."
+      echo "PM2: sudo pm2 list   (root; no fenecstudio)"
       return 0
     fi
     sleep 2

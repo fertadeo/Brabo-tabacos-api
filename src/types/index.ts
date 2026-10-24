@@ -114,6 +114,7 @@ export enum SalesChannel {
   WOOCOMMERCE_MINORISTA = 'woocommerce_minorista',
   WOOCOMMERCE_MAYORISTA = 'woocommerce_mayorista',
   MERCADOLIBRE = 'mercadolibre',
+  /** Valor histórico en DB (canal local); no implica branding MF en UI */
   SISTEMA_MFCOMPUTERS = 'sistema_mfcomputers',
   MANUAL = 'manual',
   OTRO = 'otro'

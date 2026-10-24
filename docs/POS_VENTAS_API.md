@@ -10,7 +10,7 @@ Al crear una venta, el sistema automáticamente:
 ## Crear venta
 
 - **URL:** `POST /api/sales`  
-  (base: por ejemplo `http://localhost:8086/api/sales` o la URL de tu API en producción)
+  (base: por ejemplo `http://localhost:8087/api/sales` o la URL de tu API en producción)
 
 - **Autenticación (una de las dos):**
   - **JWT (recomendado para el POS):** header `Authorization: Bearer <token>`
