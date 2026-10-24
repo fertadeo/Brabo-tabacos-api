@@ -18,12 +18,12 @@ const ADMIN = {
 };
 
 const CATEGORIES = [
-  { name: 'Cigarrillos', slug: 'cigarrillos' },
-  { name: 'Tabaco para armar', slug: 'tabaco-armar' },
-  { name: 'Cigarros / puros', slug: 'cigarros' },
-  { name: 'Accesorios', slug: 'accesorios' },
-  { name: 'Encendedores', slug: 'encendedores' },
-  { name: 'Filtros / papeles', slug: 'filtros-papeles' },
+  { name: 'Cigarrillos', slug: 'cigarrillos', description: 'Cigarrillos' },
+  { name: 'Tabaco para armar', slug: 'tabaco-armar', description: 'Tabaco para armar' },
+  { name: 'Cigarros / puros', slug: 'cigarros', description: 'Cigarros y puros' },
+  { name: 'Accesorios', slug: 'accesorios', description: 'Accesorios' },
+  { name: 'Encendedores', slug: 'encendedores', description: 'Encendedores' },
+  { name: 'Filtros / papeles', slug: 'filtros-papeles', description: 'Filtros y papeles' },
 ];
 
 async function main() {
@@ -61,29 +61,28 @@ async function main() {
     const [cols] = await connection.query('SHOW COLUMNS FROM categories');
     const colNames = cols.map((c) => c.Field);
     for (const cat of CATEGORIES) {
-      if (colNames.includes('slug') && colNames.includes('name')) {
-        const [ex] = await connection.query('SELECT id FROM categories WHERE slug = ? OR name = ? LIMIT 1', [
-          cat.slug,
-          cat.name,
-        ]);
-        if (ex.length) continue;
-        const fields = ['name', 'slug'];
-        const values = [cat.name, cat.slug];
-        if (colNames.includes('is_active')) {
-          fields.push('is_active');
-          values.push(1);
-        }
-        await connection.query(
-          `INSERT INTO categories (${fields.join(',')}) VALUES (${fields.map(() => '?').join(',')})`,
-          values
-        );
-        console.log('✅ Categoría:', cat.name);
-      } else if (colNames.includes('name')) {
-        const [ex] = await connection.query('SELECT id FROM categories WHERE name = ? LIMIT 1', [cat.name]);
-        if (ex.length) continue;
-        await connection.query('INSERT INTO categories (name) VALUES (?)', [cat.name]);
-        console.log('✅ Categoría:', cat.name);
+      if (!colNames.includes('name')) break;
+      const [ex] = await connection.query('SELECT id FROM categories WHERE name = ? LIMIT 1', [cat.name]);
+      if (ex.length) continue;
+      const fields = ['name'];
+      const values = [cat.name];
+      if (colNames.includes('slug')) {
+        fields.push('slug');
+        values.push(cat.slug);
       }
+      if (colNames.includes('description')) {
+        fields.push('description');
+        values.push(cat.description || cat.name);
+      }
+      if (colNames.includes('is_active')) {
+        fields.push('is_active');
+        values.push(1);
+      }
+      await connection.query(
+        `INSERT INTO categories (${fields.join(',')}) VALUES (${fields.map(() => '?').join(',')})`,
+        values
+      );
+      console.log('✅ Categoría:', cat.name);
     }
     console.log('✅ Seed Brabo mínimo listo');
   } finally {
