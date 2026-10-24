@@ -31,6 +31,10 @@ DB_ROOT_PASSWORD="${DB_ROOT_PASSWORD:-}"
 # Dump opcional: copia funcional (schema+datos limpios). Si vacío → schema.sql + seed.
 DB_DUMP="${DB_DUMP:-}"
 SKIP_DB_SEED="${SKIP_DB_SEED:-false}"
+# Si la BD quedó a medias (p.ej. falló en triggers ERROR 1419): RECREATE_DB=true dropea y reimporta.
+RECREATE_DB="${RECREATE_DB:-false}"
+# Umbral: menos de N tablas = "vacía/parcial leve" → importar; entre N y COMPLETE = parcial → pedir RECREATE_DB
+DB_TABLES_MIN_OK="${DB_TABLES_MIN_OK:-40}"
 
 INSTALL_NGINX="${INSTALL_NGINX:-true}"
 CORS_ORIGIN="${CORS_ORIGIN:-http://127.0.0.1:43127}"
@@ -147,9 +151,57 @@ mysql_root() {
   fi
 }
 
+# schema.sql crea TRIGGERS → con binlog activo hace falta SUPER o log_bin_trust_function_creators=1
+# (ERROR 1419 HY000). Preferimos SET GLOBAL como root; si falla, mensaje claro.
+enable_trigger_creators() {
+  log "Habilitando log_bin_trust_function_creators (triggers del schema)"
+  if mysql_root -e "SET GLOBAL log_bin_trust_function_creators = 1;"; then
+    log "log_bin_trust_function_creators=1 OK"
+    return 0
+  fi
+  warn "No se pudo SET GLOBAL log_bin_trust_function_creators (¿sin SUPER?)."
+  warn "En el VPS como root MySQL: SET GLOBAL log_bin_trust_function_creators = 1;"
+  warn "O en my.cnf: [mysqld] log_bin_trust_function_creators=1  → reiniciar MariaDB/MySQL."
+  return 1
+}
+
+db_table_count() {
+  mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" -N -e \
+    "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='${DB_NAME}';" 2>/dev/null || echo 0
+}
+
+import_sql_file() {
+  local file="$1"
+  [[ -f "$file" ]] || die "No existe SQL: $file"
+  # Import como root → evita faltantes de TRIGGER privilege en el user app
+  # (el app user sigue siendo DB_USER para la API).
+  enable_trigger_creators || warn "Continuando import; si falla ERROR 1419, aplicá el SET GLOBAL a mano y reintentá con RECREATE_DB=true"
+  sed -E \
+    -e 's/USE[[:space:]]+`?mfcomputers`?/USE `'"${DB_NAME}"'`/Ig' \
+    -e 's/USE[[:space:]]+`?brabo_tabacos`?/USE `'"${DB_NAME}"'`/Ig' \
+    -e 's/USE[[:space:]]+`[^`]+`/USE `'"${DB_NAME}"'`/Ig' \
+    "$file" | mysql_root --database="$DB_NAME" --force 2> >(tee /tmp/brabo-sql-import.err >&2) \
+    || true
+  if rg -q "ERROR 1419|HY000" /tmp/brabo-sql-import.err 2>/dev/null; then
+    die "Import falló con ERROR 1419 (triggers/binlog). Como root MySQL: SET GLOBAL log_bin_trust_function_creators = 1; luego: RECREATE_DB=true sudo -E bash scripts/bootstrap-prod.sh"
+  fi
+  if rg -q "^ERROR " /tmp/brabo-sql-import.err 2>/dev/null; then
+    warn "Hubo errores SQL durante el import — revisá /tmp/brabo-sql-import.err"
+    if [[ "$(db_table_count)" -lt 5 ]]; then
+      die "BD quedó casi vacía tras import. Revisá errores y reintentá."
+    fi
+  fi
+}
+
 setup_database() {
   log "3/8 Base de datos $DB_NAME (nueva, no MF)"
   assert_safe_db
+
+  if [[ "$RECREATE_DB" == "true" ]]; then
+    log "RECREATE_DB=true → DROP DATABASE \`${DB_NAME}\` (solo Brabo; nunca MF)"
+    assert_safe_db
+    mysql_root -e "DROP DATABASE IF EXISTS \`${DB_NAME}\`;"
+  fi
 
   mysql_root <<SQL
 CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -162,35 +214,44 @@ GRANT ALL PRIVILEGES ON \`${DB_NAME}\`.* TO '${DB_USER}'@'127.0.0.1';
 FLUSH PRIVILEGES;
 SQL
 
+  # Asegurar flag binlog antes de cualquier CREATE TRIGGER
+  enable_trigger_creators || true
+
   local table_count
-  table_count="$(mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" -N -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='${DB_NAME}';" 2>/dev/null || echo 0)"
+  table_count="$(db_table_count)"
+  table_count="${table_count//[^0-9]/}"
+  table_count="${table_count:-0}"
 
   if [[ -n "$DB_DUMP" ]]; then
     [[ -f "$DB_DUMP" ]] || die "DB_DUMP no existe: $DB_DUMP"
+    if [[ "$table_count" -ge 5 && "$RECREATE_DB" != "true" ]]; then
+      die "BD '${DB_NAME}' ya tiene ${table_count} tablas y pasaste DB_DUMP. Usá RECREATE_DB=true para reemplazar, o quitá DB_DUMP."
+    fi
     log "Restaurando dump funcional → $DB_NAME (desde $DB_DUMP)"
-    # Reescribir USE/nombre si el dump viene de otro schema (sin tocar MF remoto)
-    sed -E \
-      -e 's/USE[[:space:]]+`?mfcomputers`?/USE `'"${DB_NAME}"'`/Ig' \
-      -e 's/USE[[:space:]]+`?brabo_tabacos`?/USE `'"${DB_NAME}"'`/Ig' \
-      "$DB_DUMP" | mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME"
-  elif [[ "${table_count}" -lt 5 ]]; then
+    import_sql_file "$DB_DUMP"
+  elif [[ "$table_count" -eq 0 ]]; then
     log "Importando db/schema.sql (BD vacía)"
     [[ -f db/schema.sql ]] || die "Falta db/schema.sql"
-    # Quitar USE hardcodeado si aparece
-    sed -E 's/USE[[:space:]]+`[^`]+`/USE `'"${DB_NAME}"'`/Ig' db/schema.sql \
-      | mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME"
-    # Migraciones incrementales (best-effort; ignore already-applied)
-    if [[ -d migrations ]]; then
-      log "Aplicando migrations/*.sql (best-effort)"
-      for f in migrations/*.sql; do
-        [[ -f "$f" ]] || continue
-        mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" < "$f" \
-          && log "  ok $(basename "$f")" \
-          || warn "  skip/error $(basename "$f") (puede estar aplicada)"
-      done
-    fi
+    import_sql_file db/schema.sql
+  elif [[ "$table_count" -lt 5 ]]; then
+    log "BD parcial (${table_count} tablas) — reimportando schema"
+    [[ -f db/schema.sql ]] || die "Falta db/schema.sql"
+    import_sql_file db/schema.sql
+  elif [[ "$table_count" -lt "$DB_TABLES_MIN_OK" ]]; then
+    die "BD '${DB_NAME}' parece incompleta (${table_count} tablas < ${DB_TABLES_MIN_OK}). Suele pasar tras ERROR 1419 a mitad del schema. Reintentá: RECREATE_DB=true sudo -E bash scripts/bootstrap-prod.sh"
   else
-    log "BD ya tiene ${table_count} tablas — no reimporta schema (idempotente)"
+    log "BD ya tiene ${table_count} tablas — no reimporta schema (idempotente). RECREATE_DB=true para forzar."
+  fi
+
+  # Migraciones incrementales (best-effort)
+  if [[ -d migrations ]]; then
+    log "Aplicando migrations/*.sql (best-effort)"
+    for f in migrations/*.sql; do
+      [[ -f "$f" ]] || continue
+      mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" < "$f" \
+        && log "  ok $(basename "$f")" \
+        || warn "  skip/error $(basename "$f") (puede estar aplicada)"
+    done
   fi
 }
 
