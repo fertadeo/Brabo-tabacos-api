@@ -20,8 +20,8 @@ cd /var/www/brabo-tabacos-api
 sudo -E env \
   DB_PASSWORD='TU_PASSWORD_FUERTE' \
   JWT_SECRET='TU_JWT_LARGO' \
-  CORS_ORIGIN='https://TU-FRONT' \
-  DOMAIN='api.tu-dominio.com' \
+  CORS_ORIGIN='https://brabo.aurixerp.com' \
+  DOMAIN='api-brabo.aurixerp.com' \
   RECREATE_DB=true \
   bash scripts/bootstrap-prod.sh
 ```
@@ -96,6 +96,17 @@ Credenciales mock: `admin` / `CambiarYa123!` — cambiar en prod.
 
 https://github.com/fertadeo/Brabo-tabacos-nextjs
 
+## Nginx + Certbot (aurixerp.com)
+
+Configs de ejemplo: [`deploy/nginx/`](./deploy/nginx/)
+
+| Host | Destino |
+| --- | --- |
+| `https://api-brabo.aurixerp.com` | `127.0.0.1:8088` |
+| `https://brabo.aurixerp.com` | `127.0.0.1:3088` (Next; 502 hasta que exista) |
+
+Ver `deploy/nginx/README.md` (DNS A, certbot, `CORS_ORIGIN`, `NEXT_PUBLIC_API_URL`).
+
 ## Origen Gold
 
 https://github.com/fertadeo/mfcomputers-API — no pushear custom Brabo ahí.
@@ -103,9 +114,9 @@ https://github.com/fertadeo/mfcomputers-API — no pushear custom Brabo ahí.
 ## Pendiente
 
 - Host/SSH del VPS (Fernando) para ejecutar el bootstrap remoto
-- TLS (certbot), logos, reglas IVA tabaco
+- Logos, reglas IVA tabaco
 - Registrar instancia en Fenec Admin después
-
+- Front en VPS `:3088` (cuando se despliegue)
 
 ### Puertos VPS (inventario)
 
@@ -115,13 +126,16 @@ https://github.com/fertadeo/mfcomputers-API — no pushear custom Brabo ahí.
 | 8081 | cortinova |
 | 8086 | MF Computers |
 | 8087 | HGroup (HG-API) |
-| **8088** | **Brabo Tabacos** |
+| **8088** | **Brabo Tabacos API** |
+| **3088** | **Brabo front** (`next start`) |
 
 Cada cliente nuevo = otro PORT. Bootstrap rechaza 8080/8081/8086/8087.
 
 ```bash
-# .env → PORT=8088
+# .env → PORT=8088 CORS_ORIGIN=https://brabo.aurixerp.com
 sudo PM2_HOME=/root/.pm2 pm2 restart brabo-tabacos-api
 curl -s http://127.0.0.1:8088/health
+# tras nginx+certbot:
+curl -s https://api-brabo.aurixerp.com/health
 ```
 
