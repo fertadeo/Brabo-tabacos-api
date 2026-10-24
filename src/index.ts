@@ -17,6 +17,8 @@ logFacturadorEnvStartupOnce();
 
 const app = express();
 const PORT = process.env.PORT || 8087;
+const APP_DISPLAY_NAME =
+  process.env.APP_NAME?.trim() || process.env.NEXT_PUBLIC_APP_NAME?.trim() || 'Brabo Tabacos';
 
 // Middleware
 app.use(helmet({
@@ -160,13 +162,14 @@ app.use((req, res, next) => {
   next();
 });
 
-// Health check endpoint
+// Health check endpoint (nunca mensaje MF — instancia Brabo)
 app.get('/health', (req, res) => {
   res.status(200).json({
     status: 'OK',
-    message: 'Brabo Tabacos API is running',
+    message: `${APP_DISPLAY_NAME} API is running`,
+    service: 'brabo-tabacos-api',
     timestamp: new Date().toISOString(),
-    port: PORT
+    port: PORT,
   });
 });
 
@@ -265,7 +268,7 @@ const startServer = async () => {
     }
 
     app.listen(PORT, () => {
-      console.log(`🚀 Brabo Tabacos API Server running on port ${PORT}`);
+      console.log(`🚀 ${APP_DISPLAY_NAME} API Server running on port ${PORT}`);
       console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`🔗 Health check: http://localhost:${PORT}/health`);
       console.log(`📡 API endpoint: http://localhost:${PORT}/api`);
