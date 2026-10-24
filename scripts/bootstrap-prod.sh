@@ -18,8 +18,8 @@ APP_NAME="${APP_NAME:-brabo-tabacos-api}"
 APP_DIR="${APP_DIR:-/var/www/brabo-tabacos-api}"
 GIT_URL="${GIT_URL:-https://github.com/fertadeo/Brabo-tabacos-api.git}"
 GIT_BRANCH="${GIT_BRANCH:-main}"
-# Regla producto Fenec: cada cliente = PORT distinto. 8086 = MF Computers (no reutilizar).
-PORT="${PORT:-8087}"
+# Regla producto Fenec: cada cliente = PORT distinto. No usar 8086 (MF) ni 8087 (HGroup). Brabo=8088.
+PORT="${PORT:-8088}"
 DOMAIN="${DOMAIN:-}"
 NODE_MAJOR="${NODE_MAJOR:-20}"
 
@@ -85,9 +85,13 @@ assert_safe_db() {
 rand_hex() { openssl rand -hex 24 2>/dev/null || head -c 48 /dev/urandom | xxd -p | tr -d '\n' | head -c 48; }
 
 assert_safe_port() {
-  if [[ "$PORT" == "8086" ]]; then
-    die "PORT=8086 está reservado a MF Computers. Usá otro (Brabo default 8087). Regla: cada cliente = un PORT distinto."
-  fi
+  # Inventario VPS Fenec (no reutilizar):
+  # 8080 stock | 8081 cortinova | 8086 MF | 8087 HGroup | 8088 Brabo
+  case "$PORT" in
+    8080|8081|8086|8087)
+      die "PORT=$PORT está reservado (stock/cortinova/MF/HGroup). Brabo default 8088. Regla: cada cliente = un PORT distinto."
+      ;;
+  esac
 }
 
 ensure_vars() {

@@ -4,7 +4,7 @@ Instancia fork desde `mfcomputers-API` (GOLD retail). **No** multi-tenant Aurix 
 
 ## Stack
 
-Node.js + Express + TypeScript + MySQL/MariaDB. Puerto default `8087`.
+Node.js + Express + TypeScript + MySQL/MariaDB. Puerto default `8088`.
 
 ## Producción Ubuntu (un solo comando)
 
@@ -37,7 +37,7 @@ El script es **idempotente**: deps (Node 20, MariaDB, PM2, nginx opcional), clon
 | `APP_DIR` | `/var/www/brabo-tabacos-api` | |
 | `GIT_URL` | este repo | |
 | `GIT_BRANCH` | `main` | |
-| `PORT` | `8087` | **Nunca 8086** (MF). Cada cliente nuevo = otro PORT |
+| `PORT` | `8088` | **Nunca 8086** (MF). Cada cliente nuevo = otro PORT |
 | `DOMAIN` | vacío | si se setea, configura nginx :80 |
 | `DB_NAME` | `brabo_tabacos` | rechaza nombres tipo `mfcomputers` |
 | `DB_USER` / `DB_PASSWORD` | `brabo` / (generado) | |
@@ -86,7 +86,7 @@ mysql brabo_tabacos < db/schema.sql
 npm install && npm run seed:brabo && npm run dev
 ```
 
-API: `http://127.0.0.1:8087/api/`
+API: `http://127.0.0.1:8088/api/`
 
 Credenciales mock: `admin` / `CambiarYa123!` — cambiar en prod.
 
@@ -107,10 +107,21 @@ https://github.com/fertadeo/mfcomputers-API — no pushear custom Brabo ahí.
 - Registrar instancia en Fenec Admin después
 
 
-### Puerto vs MF (mismo VPS)
+### Puertos VPS (inventario)
 
-- Brabo default: **8087**
-- MF prod suele: **8086**
-- No compartan PORT. Liberar 8086 si era un intento viejo de Brabo:
-  `sudo lsof -i :8086` → `sudo pm2 delete <nombre>` o `sudo fuser -k 8086/tcp`
-- Arrancar Brabo: `PORT=8087` en `.env` y `sudo pm2 restart brabo-tabacos-api`
+| PORT | Cliente |
+| --- | --- |
+| 8080 | sistema-stock |
+| 8081 | cortinova |
+| 8086 | MF Computers |
+| 8087 | HGroup (HG-API) |
+| **8088** | **Brabo Tabacos** |
+
+Cada cliente nuevo = otro PORT. Bootstrap rechaza 8080/8081/8086/8087.
+
+```bash
+# .env → PORT=8088
+sudo PM2_HOME=/root/.pm2 pm2 restart brabo-tabacos-api
+curl -s http://127.0.0.1:8088/health
+```
+

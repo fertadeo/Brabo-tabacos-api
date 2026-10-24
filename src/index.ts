@@ -16,7 +16,7 @@ dotenv.config();
 logFacturadorEnvStartupOnce();
 
 const app = express();
-const PORT = process.env.PORT || 8087;
+const PORT = process.env.PORT || 8088;
 /** Nombre de instancia. Ignora restos MF en .env copiado de otro cliente. */
 function resolveAppDisplayName(): string {
   const raw =
