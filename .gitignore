@@ -171,3 +171,4 @@ vite.config.ts.timestamp-*
 db-test.sql
 .env
 .env.local
+!.env.production.example
