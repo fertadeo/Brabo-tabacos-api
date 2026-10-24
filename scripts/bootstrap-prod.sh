@@ -294,16 +294,45 @@ EOF
   log ".env escrito en $env_file"
 }
 
+# Tras tsc: con rootDir=src → dist/index.js; sin rootDir a veces dist/src/index.js
+resolve_entry_js() {
+  cd "$APP_DIR"
+  if [[ -f dist/index.js ]]; then
+    ENTRY_JS="dist/index.js"
+  elif [[ -f dist/src/index.js ]]; then
+    ENTRY_JS="dist/src/index.js"
+  else
+    ENTRY_JS=""
+  fi
+}
+
 build_app() {
   log "5/8 npm ci + build"
   cd "$APP_DIR"
+  # Si el shell trae NODE_ENV=production, npm ci omite typescript/rimraf (devDependencies)
+  # y el build no genera dist/ → PM2: Cannot find module .../dist/index.js
+  log "Instalando deps (incluye devDependencies para tsc)"
   if [[ -f package-lock.json ]]; then
-    npm ci
+    npm ci --include=dev
   else
-    npm install
+    npm install --include=dev
+  fi
+  command -v npx >/dev/null || die "npx no disponible"
+  if ! npx --no-install tsc --version >/dev/null 2>&1 && ! [[ -x node_modules/.bin/tsc ]]; then
+    die "TypeScript no quedó instalado tras npm ci --include=dev. Abortando antes de PM2."
   fi
   npm run build
-  [[ -f dist/index.js ]] || die "Build falló: no hay dist/index.js"
+  resolve_entry_js
+  if [[ -z "$ENTRY_JS" ]]; then
+    warn "Contenido de dist/ tras build:"
+    find dist -type f -name '*.js' 2>/dev/null | head -40 || true
+    die "Build OK aparente pero no hay dist/index.js ni dist/src/index.js. No se arranca PM2."
+  fi
+  log "Entry JS: $APP_DIR/$ENTRY_JS"
+  # Alinear package.json start/main sin editar a mano en VPS
+  if [[ "$ENTRY_JS" != "dist/index.js" ]]; then
+    warn "Entry no estándar ($ENTRY_JS) — ecosystem usará esa ruta"
+  fi
 }
 
 seed_db() {
@@ -321,11 +350,14 @@ seed_db() {
 }
 
 write_ecosystem() {
+  resolve_entry_js
+  [[ -n "$ENTRY_JS" ]] || die "write_ecosystem: falta entry JS (corriste build_app?)"
+  [[ -f "$APP_DIR/$ENTRY_JS" ]] || die "write_ecosystem: no existe $APP_DIR/$ENTRY_JS"
   cat > "$APP_DIR/ecosystem.config.cjs" <<EOF
 module.exports = {
   apps: [{
     name: '${APP_NAME}',
-    script: 'dist/index.js',
+    script: '${ENTRY_JS}',
     cwd: '${APP_DIR}',
     instances: 1,
     exec_mode: 'fork',
@@ -335,16 +367,24 @@ module.exports = {
   }],
 };
 EOF
+  log "ecosystem.config.cjs → script=${ENTRY_JS}"
 }
 
 start_pm2() {
   log "7/8 PM2 start/restart"
   cd "$APP_DIR"
+  resolve_entry_js
+  [[ -n "$ENTRY_JS" && -f "$ENTRY_JS" ]] || die "Antes de PM2 debe existir el entry (dist/index.js). Rebuild falló o incompleto."
   write_ecosystem
   mkdir -p logs
-  # Correr PM2 como el usuario dueño del dir si no es root-only
   pm2 delete "$APP_NAME" 2>/dev/null || true
   pm2 start ecosystem.config.cjs
+  # Verificar que el proceso no quede errored por módulo faltante
+  sleep 2
+  if pm2 jlist 2>/dev/null | grep -q "\"name\":\"${APP_NAME}\"" && pm2 jlist 2>/dev/null | grep -q '"status":"errored"'; then
+    pm2 logs "$APP_NAME" --lines 30 --nostream || true
+    die "PM2 quedó errored. Revisá que exista $APP_DIR/$ENTRY_JS"
+  fi
   pm2 save
   pm2 startup systemd -u root --hp /root >/dev/null 2>&1 || true
 }

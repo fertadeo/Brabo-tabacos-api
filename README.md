@@ -15,15 +15,18 @@ En el VPS (Ubuntu 20.04+), con sudo:
 sudo mkdir -p /var/www && sudo git clone https://github.com/fertadeo/Brabo-tabacos-api.git /var/www/brabo-tabacos-api
 cd /var/www/brabo-tabacos-api
 
-export DB_PASSWORD='TU_PASSWORD_FUERTE'
-export JWT_SECRET='TU_JWT_LARGO'
-export CORS_ORIGIN='https://TU-FRONT'
-export DOMAIN='api.tu-dominio.com'          # opcional → nginx
-# export DB_DUMP=/ruta/dump-brabo-limpio.sql  # opcional: copia BD funcional
-# Nunca uses la BD/host de prod MF Computers
-
-sudo -E bash scripts/bootstrap-prod.sh
+# Todas las vars en la MISMA invocación (sudo no hereda exports previos sin -E,
+# y RECREATE_DB=true en una línea sola no llega al script):
+sudo -E env \
+  DB_PASSWORD='TU_PASSWORD_FUERTE' \
+  JWT_SECRET='TU_JWT_LARGO' \
+  CORS_ORIGIN='https://TU-FRONT' \
+  DOMAIN='api.tu-dominio.com' \
+  RECREATE_DB=true \
+  bash scripts/bootstrap-prod.sh
 ```
+
+`tsconfig` → `outDir=dist` + `rootDir=src` ⇒ entry **`dist/index.js`** (PM2/`npm start`). El bootstrap hace `npm ci --include=dev` para que `tsc` exista aunque el shell tenga `NODE_ENV=production`.
 
 El script es **idempotente**: deps (Node 20, MariaDB, PM2, nginx opcional), clona/actualiza repo, crea BD **`brabo_tabacos`** nueva, importa `db/schema.sql` + seed (o `DB_DUMP`), escribe `.env`, `npm ci` + build, PM2, healthcheck `GET /health`.
 
@@ -54,8 +57,20 @@ Si el import falla con `ERROR 1419 ... log_bin_trust_function_creators`, el scri
 ```bash
 # opcional manual:
 sudo mysql -e "SET GLOBAL log_bin_trust_function_creators = 1;"
-export RECREATE_DB=true
-sudo -E bash scripts/bootstrap-prod.sh
+# RECREATE_DB tiene que viajar con sudo -E (misma línea / env):
+sudo -E env RECREATE_DB=true DB_PASSWORD='...' JWT_SECRET='...' CORS_ORIGIN='...' \
+  bash scripts/bootstrap-prod.sh
+```
+
+### PM2: Cannot find module `dist/index.js`
+
+Causa típica: `npm ci` sin devDeps (TypeScript) → no hay `dist/`. El bootstrap actual falla antes de PM2 si falta el entry. Fix manual:
+
+```bash
+cd /var/www/brabo-tabacos-api
+sudo git pull
+sudo npm ci --include=dev && sudo npm run build
+test -f dist/index.js && sudo pm2 restart brabo-tabacos-api
 ```
 
 ## Levantar local
