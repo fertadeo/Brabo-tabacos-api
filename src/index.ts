@@ -17,8 +17,19 @@ logFacturadorEnvStartupOnce();
 
 const app = express();
 const PORT = process.env.PORT || 8087;
-const APP_DISPLAY_NAME =
-  process.env.APP_NAME?.trim() || process.env.NEXT_PUBLIC_APP_NAME?.trim() || 'Brabo Tabacos';
+/** Nombre de instancia. Ignora restos MF en .env copiado de otro cliente. */
+function resolveAppDisplayName(): string {
+  const raw =
+    process.env.APP_NAME?.trim() ||
+    process.env.NEXT_PUBLIC_APP_NAME?.trim() ||
+    '';
+  if (!raw || /mf\s*computers/i.test(raw) || /mfcomputers/i.test(raw)) {
+    return 'Brabo Tabacos';
+  }
+  return raw;
+}
+const APP_DISPLAY_NAME = resolveAppDisplayName();
+const HEALTH_MESSAGE = 'Brabo Tabacos API is running';
 
 // Middleware
 app.use(helmet({
@@ -162,12 +173,13 @@ app.use((req, res, next) => {
   next();
 });
 
-// Health check endpoint (nunca mensaje MF — instancia Brabo)
+// Health check endpoint — mensaje fijo Brabo (no depende de APP_NAME sucio)
 app.get('/health', (req, res) => {
   res.status(200).json({
     status: 'OK',
-    message: `${APP_DISPLAY_NAME} API is running`,
+    message: HEALTH_MESSAGE,
     service: 'brabo-tabacos-api',
+    app: APP_DISPLAY_NAME,
     timestamp: new Date().toISOString(),
     port: PORT,
   });
