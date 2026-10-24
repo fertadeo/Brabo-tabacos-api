@@ -1,0 +1,35 @@
+{
+  "order_date": "2024-01-15T10:00:00Z",
+  "order_number": "WC-12345",
+  "customer": {
+    "email": "cliente@example.com",
+    "first_name": "Juan",
+    "last_name": "Pérez",
+    "phone": "11-1234-5678",
+    "display_name": "Juan Pérez"
+  },
+  "line_items": [
+    {
+      "sku": "ABAN-001",
+      "quantity": 5,
+      "price": "1500.00"
+    }
+  ],
+  "shipping": {
+    "address_1": "Av. Corrientes 1234",
+    "city": "CABA",
+    "country": "Argentina",
+    "phone": "11-1234-5678",
+    "method": "OCA",
+    "total": "500.00",
+    "delivery_date": "2024-01-20T10:00:00Z"
+  },
+  "billing": {
+    "address_1": "Av. Corrientes 1234",
+    "city": "CABA",
+    "country": "Argentina",
+    "phone": "11-1234-5678"
+  },
+  "meta_data": {}
+}
+

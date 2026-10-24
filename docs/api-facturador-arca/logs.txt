@@ -1,0 +1,90 @@
+fenecstudio@vps-4441226-x:~$ sudo pm2 logs 6 --lines 500
+[TAILING] Tailing last 500 lines for [6] process (change the value with --lines option)
+/root/.pm2/logs/multicuit-error.log last 500 lines:
+/root/.pm2/logs/multicuit-out.log last 500 lines:
+6|multicui | {"level":"info","message":"[HTTP][44e6ea94-aa56-40bd-9efd-ca2ae42cefc9] GET /api/auth/memberships -> 304 (8ms)","timestamp":"2026-06-09T16:26:33.961Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/platform/metrics/overview?period=historical","requestId":"b7a8c9b0-04e4-4433-a6b3-f5a07298cf70"},"timestamp":"2026-06-09T16:26:33.971Z"}
+6|multicui | GET /api/platform/summary?period=historical 200 129.515 ms - 803
+6|multicui | {"level":"info","message":"[HTTP][9389b377-3956-4645-93f6-60320da25f29] GET /api/platform/summary -> 200 (130ms)","timestamp":"2026-06-09T16:26:34.085Z"}
+6|multicui | GET /api/platform/metrics/negocio?period=historical 200 201.336 ms - 1391
+6|multicui | {"level":"info","message":"[HTTP][4842b784-5f33-4a6d-8973-9f806b3e552a] GET /api/platform/metrics/negocio -> 200 (201ms)","timestamp":"2026-06-09T16:26:34.159Z"}
+6|multicui | GET /api/admin/me 200 291.559 ms - 955
+6|multicui | {"level":"info","message":"[HTTP][d1adfed8-fa72-41a8-9e4a-ee28f42ed38a] GET /api/admin/me -> 200 (292ms)","timestamp":"2026-06-09T16:26:34.249Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/admin/me","requestId":"f7d4fa9e-bf49-4e7a-8ff6-10e1fbdff691"},"timestamp":"2026-06-09T16:26:34.280Z"}
+6|multicui | GET /api/platform/metrics/overview?period=historical 200 377.335 ms - 508
+6|multicui | {"level":"info","message":"[HTTP][b7a8c9b0-04e4-4433-a6b3-f5a07298cf70] GET /api/platform/metrics/overview -> 200 (378ms)","timestamp":"2026-06-09T16:26:34.349Z"}
+6|multicui | GET /api/platform/quota/resumen 200 463.062 ms - 2184
+6|multicui | {"level":"info","message":"[HTTP][11b4f980-8bd7-4d44-9043-8ac13bba67e3] GET /api/platform/quota/resumen -> 200 (464ms)","timestamp":"2026-06-09T16:26:34.424Z"}
+6|multicui | GET /api/admin/me 304 304.217 ms - -
+6|multicui | {"level":"info","message":"[HTTP][f7d4fa9e-bf49-4e7a-8ff6-10e1fbdff691] GET /api/admin/me -> 304 (304ms)","timestamp":"2026-06-09T16:26:34.585Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/auth/session","requestId":"6d2cb6f7-0f5f-4268-8560-03fbaec279d8"},"timestamp":"2026-06-09T16:26:38.521Z"}
+6|multicui | GET /api/auth/session 200 2.443 ms - 250
+6|multicui | {"level":"info","message":"[HTTP][6d2cb6f7-0f5f-4268-8560-03fbaec279d8] GET /api/auth/session -> 200 (3ms)","timestamp":"2026-06-09T16:26:38.524Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/admin/me","requestId":"ea1a8f29-8197-4283-9b5c-44db3e144956"},"timestamp":"2026-06-09T16:26:38.568Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/auth/session","requestId":"f8dcf9ba-483b-441d-a9b9-a57b2a73cd77"},"timestamp":"2026-06-09T16:26:38.570Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/meta/environment","requestId":"873a96e7-d85c-4f05-8ac3-e8fce4a090d6"},"timestamp":"2026-06-09T16:26:38.572Z"}
+6|multicui | GET /api/meta/environment 304 0.180 ms - -
+6|multicui | GET /api/auth/session 304 2.781 ms - -
+6|multicui | {"level":"info","message":"[HTTP][f8dcf9ba-483b-441d-a9b9-a57b2a73cd77] GET /api/auth/session -> 304 (2ms)","timestamp":"2026-06-09T16:26:38.574Z"}
+6|multicui | GET /api/admin/me 304 185.493 ms - -
+6|multicui | {"level":"info","message":"[HTTP][ea1a8f29-8197-4283-9b5c-44db3e144956] GET /api/admin/me -> 304 (186ms)","timestamp":"2026-06-09T16:26:38.754Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/admin/me","requestId":"694fb5f1-e46d-47a7-b363-3080e9ad743f"},"timestamp":"2026-06-09T16:26:38.786Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/platform/quota/resumen","requestId":"14e0c42f-93fe-42f9-b11e-784eef13fa3e"},"timestamp":"2026-06-09T16:26:38.874Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/platform/metrics/negocio?period=historical","requestId":"aea184c3-7a07-489c-9030-392a3568b4bb"},"timestamp":"2026-06-09T16:26:38.875Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/auth/memberships","requestId":"eea40380-5b8d-4ad5-bdae-0bf0ddc8785f"},"timestamp":"2026-06-09T16:26:38.877Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/platform/metrics/overview?period=historical","requestId":"6b54637b-4c71-49fd-bc01-6bc5660a4be6"},"timestamp":"2026-06-09T16:26:38.878Z"}
+6|multicui | GET /api/auth/memberships 304 3.255 ms - -
+6|multicui | {"level":"info","message":"[HTTP][eea40380-5b8d-4ad5-bdae-0bf0ddc8785f] GET /api/auth/memberships -> 304 (3ms)","timestamp":"2026-06-09T16:26:38.880Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/platform/summary?period=historical","requestId":"c99bca65-839c-4dde-be0d-827b670fa948"},"timestamp":"2026-06-09T16:26:38.881Z"}
+6|multicui | GET /api/admin/me 304 168.443 ms - -
+6|multicui | {"level":"info","message":"[HTTP][694fb5f1-e46d-47a7-b363-3080e9ad743f] GET /api/admin/me -> 304 (169ms)","timestamp":"2026-06-09T16:26:38.955Z"}
+6|multicui | GET /api/platform/quota/resumen 200 155.182 ms - 2184
+6|multicui | {"level":"info","message":"[HTTP][14e0c42f-93fe-42f9-b11e-784eef13fa3e] GET /api/platform/quota/resumen -> 200 (156ms)","timestamp":"2026-06-09T16:26:39.030Z"}
+6|multicui | GET /api/platform/metrics/negocio?period=historical 200 246.622 ms - 1391
+6|multicui | {"level":"info","message":"[HTTP][aea184c3-7a07-489c-9030-392a3568b4bb] GET /api/platform/metrics/negocio -> 200 (247ms)","timestamp":"2026-06-09T16:26:39.122Z"}
+6|multicui | GET /api/platform/metrics/overview?period=historical 200 318.662 ms - 508
+6|multicui | {"level":"info","message":"[HTTP][6b54637b-4c71-49fd-bc01-6bc5660a4be6] GET /api/platform/metrics/overview -> 200 (319ms)","timestamp":"2026-06-09T16:26:39.197Z"}
+6|multicui | GET /api/platform/summary?period=historical 200 397.495 ms - 803
+6|multicui | {"level":"info","message":"[HTTP][c99bca65-839c-4dde-be0d-827b670fa948] GET /api/platform/summary -> 200 (398ms)","timestamp":"2026-06-09T16:26:39.279Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/admin/audit-events?limit=25&offset=0","requestId":"e646bf92-21d9-4ab9-ac42-cd2ab4f73e37"},"timestamp":"2026-06-09T16:26:49.567Z"}
+6|multicui | GET /api/admin/audit-events?limit=25&offset=0 200 94.381 ms - 9503
+6|multicui | {"level":"info","message":"[HTTP][e646bf92-21d9-4ab9-ac42-cd2ab4f73e37] GET /api/admin/audit-events -> 200 (94ms)","timestamp":"2026-06-09T16:26:49.662Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/platform/security-events?limit=30&offset=0","requestId":"c1b2d352-56fe-4d9f-b1e2-0132ae42eb75"},"timestamp":"2026-06-09T16:27:03.654Z"}
+6|multicui | GET /api/platform/security-events?limit=30&offset=0 200 702.313 ms - 226
+6|multicui | {"level":"info","message":"[HTTP][c1b2d352-56fe-4d9f-b1e2-0132ae42eb75] GET /api/platform/security-events -> 200 (703ms)","timestamp":"2026-06-09T16:27:04.357Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/admin/logs?limit=40&offset=0","requestId":"c4b14067-c0cd-403e-9e21-cee4afd38c48"},"timestamp":"2026-06-09T16:27:05.322Z"}
+6|multicui | GET /api/admin/logs?limit=40&offset=0 200 375.672 ms - 18607
+6|multicui | {"level":"info","message":"[HTTP][c4b14067-c0cd-403e-9e21-cee4afd38c48] GET /api/admin/logs -> 200 (376ms)","timestamp":"2026-06-09T16:27:05.698Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":null,"path":"/ping","requestId":"042e7a15-1355-4ec4-9ac8-210aded2d6d7"},"timestamp":"2026-06-09T16:27:24.904Z"}
+6|multicui | GET /ping 200 0.184 ms - 13
+6|multicui | {"level":"info","message":{"method":"POST","msg":"http_in","origin":null,"path":"/api/facturas","requestId":"a6768170-7c16-450d-ac10-823a385c57cb"},"timestamp":"2026-06-09T16:27:24.946Z"}
+6|multicui | {"level":"info","message":"[ArcaService] Iniciando comprobante tipo 1, PV 5, CUIT 20339985945","timestamp":"2026-06-09T16:27:25.323Z"}
+6|multicui | {"level":"error","message":"[ArcaService] [ARCA] WSFE no devolvió CAE (respuesta vacía o incompleta). Revisá PV/tipo en ARCA, entorno y régimen fiscal vs tipo de factura.","timestamp":"2026-06-09T16:27:25.433Z"}
+6|multicui | POST /api/facturas 502 488.356 ms - 642
+6|multicui | {"level":"info","message":"[HTTP][a6768170-7c16-450d-ac10-823a385c57cb] POST /api/facturas -> 502 (489ms)","timestamp":"2026-06-09T16:27:25.435Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/admin/logs?limit=40&offset=0&q=%2Fapi%2Ffacturas&method=POST","requestId":"a751d2d1-d337-4c6b-a23e-680acddf0050"},"timestamp":"2026-06-09T16:28:57.990Z"}
+6|multicui | GET /api/admin/logs?limit=40&offset=0&q=%2Fapi%2Ffacturas&method=POST 200 97.323 ms - 3851
+6|multicui | {"level":"info","message":"[HTTP][a751d2d1-d337-4c6b-a23e-680acddf0050] GET /api/admin/logs -> 200 (98ms)","timestamp":"2026-06-09T16:28:58.089Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/admin/logs?limit=40&offset=0&onlyErrors=true","requestId":"d6d125f2-dbaf-4c99-9701-be8223cd4110"},"timestamp":"2026-06-09T16:29:31.346Z"}
+6|multicui | GET /api/admin/logs?limit=40&offset=0&onlyErrors=true 200 24.265 ms - 18308
+6|multicui | {"level":"info","message":"[HTTP][d6d125f2-dbaf-4c99-9701-be8223cd4110] GET /api/admin/logs -> 200 (25ms)","timestamp":"2026-06-09T16:29:31.371Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":null,"path":"/ping","requestId":"c20311c2-974a-4e74-81e0-a058c1cc7365"},"timestamp":"2026-06-09T16:36:45.388Z"}
+6|multicui | GET /ping 200 0.172 ms - 13
+6|multicui | {"level":"info","message":{"method":"POST","msg":"http_in","origin":null,"path":"/api/facturas","requestId":"b23c5033-235a-4e2f-9444-b5f6886e418c"},"timestamp":"2026-06-09T16:36:45.436Z"}
+6|multicui | {"level":"info","message":"[ArcaService] Iniciando comprobante tipo 1, PV 5, CUIT 20339985945","timestamp":"2026-06-09T16:36:45.790Z"}
+6|multicui | {"level":"error","message":"[ArcaService] [ARCA] WSFE no devolvió CAE (respuesta vacía o incompleta). Revisá PV/tipo en ARCA, entorno y régimen fiscal vs tipo de factura.","timestamp":"2026-06-09T16:36:45.886Z"}
+6|multicui | POST /api/facturas 502 450.443 ms - 642
+6|multicui | {"level":"info","message":"[HTTP][b23c5033-235a-4e2f-9444-b5f6886e418c] POST /api/facturas -> 502 (451ms)","timestamp":"2026-06-09T16:36:45.887Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":null,"path":"/ping","requestId":"d12928c2-8cf0-4ea8-b6cf-9ea7f3b4e662"},"timestamp":"2026-06-09T16:36:46.522Z"}
+6|multicui | GET /ping 200 0.166 ms - 13
+6|multicui | {"level":"info","message":{"method":"POST","msg":"http_in","origin":null,"path":"/api/facturas","requestId":"80cfbfa7-9a2d-406b-8ab6-bceee7a5d46d"},"timestamp":"2026-06-09T16:36:46.544Z"}
+6|multicui | {"level":"info","message":"[ArcaService] Iniciando comprobante tipo 6, PV 5, CUIT 20339985945","timestamp":"2026-06-09T16:36:47.898Z"}
+6|multicui | {"level":"info","message":"[ArcaService] Verificación WSFE OK en intento 1","timestamp":"2026-06-09T16:36:48.038Z"}
+6|multicui | {"arcaCreateVoucher":{"CAE":"86239045708260","CAEFchVto":"20260619","sdkRaw":{"cae":"86239045708260","caeFchVto":"20260619","response":{"Events":{"Evt":[{"Code":44,"Msg":"IMPORTANTE: Se encuentra disponible en modo testing la version 4.5 https://www.arca.gob.ar/fe/ayuda/documentos/wsfev1-RG-4291.pdf del manual del desarrollador para el ambiente http://wswhomo.afip.gov.ar/wsfev1/service.asmx. Los cambios del apartado 4.3 impactaran en produccion el dia miercoles 10/06/2026 a partir de las 22:00hs. Por tal motivo el sistema estara fuera de servicio por el transcurso de 1 hora."},{"Code":39,"Msg":"IMPORTANTE: El dia 6 de abril de 2025, se actualizo la version del Web Service (WS) que permite enviar, de forma opcional, el campo Condicion Frente al IVA del receptor. Cabe destacar que la Resolucion General Nro 5616 indica que ese dato debe enviarse de manera obligatoria a partir del 15/04/2025. No obstante, se mantendra como un dato no excluyente hasta el 31/08/2026, inclusive. A partir del 01/09/2026 se rechazaran las solicitudes de emision de comprobantes sin este dato. Para mas informacion, consultar el manual en: https://www.arca.gob.ar/fe/ayuda/webservice.asp, https://www.arca.gob.ar/ws/documentacion/ws-factura-electronica.asp"}]},"FeCabResp":{"CantReg":1,"CbteTipo":6,"Cuit":20339985945,"FchProceso":"20260609133647","PtoVta":5,"Reproceso":"N","Resultado":"A"},"FeDetResp":{"FECAEDetResponse":[{"CAE":"86239045708260","CAEFchVto":"20260619","CbteDesde":6,"CbteFch":"20260609","CbteHasta":6,"Concepto":1,"DocNro":0,"DocTipo":99,"Resultado":"A"}]}}}},"comprobante":{"cuitEmisor":20339985945,"fechaEmision":"2026-06-09","numero":6,"puntoVenta":5,"qrUrl":"https://www.afip.gob.ar/fe/qr/?p=eyJ2ZXIiOjEsImZlY2hhIjoiMjAyNi0wNi0wOSIsImN1aXQiOjIwMzM5OTg1OTQ1LCJwdG9WdGEiOjUsInRpcG9DbXAiOjYsIm5yb0NtcCI6NiwiaW1wb3J0ZSI6MTUwMDAsIm1vbmVkYSI6IlBFUyIsImN0eiI6MSwidGlwb0RvY1JlYyI6OTksIm5yb0RvY1JlYyI6MCwidGlwb0NvZEF1dCI6IkUiLCJjb2RBdXQiOjg2MjM5MDQ1NzA4MjYwfQ%3D%3D","tipo":6},"level":"info","message":"[ArcaService] Respuesta ARCA (createVoucher) y datos alineados al PDF","solicitudYEtiquetasPdf":{"concepto":1,"condicionIvaReceptor":5,"cuitEmisor":20339985945,"docNro":"0","docTipo":99,"importe":15000,"iva":[{"base":12396.69,"cuota":2603.31,"id":5}],"puntoVenta":5,"tipo":6},"timestamp":"2026-06-09T16:36:48.039Z","verificacionWsfe":{"intentos":1,"mensaje":"Comprobante confirmado en WSFE por FECompConsultar.","ok":true},"wsfePayloadResumen":{"CbteDesde":6,"CbteFch":20260609,"CbteHasta":6,"CbteTipo":6,"Concepto":1,"CondicionIVAReceptorId":5,"DocNro":"0","DocTipo":99,"ImpIVA":2603.31,"ImpNeto":12396.69,"ImpTotal":15000,"PtoVta":5}}
+6|multicui | {"level":"info","message":"[FacturaDB] Factura persistida id=9fe95a96-14e0-434c-8a38-eec1513a38d9 nro=6 PV=5","timestamp":"2026-06-09T16:36:48.935Z"}
+6|multicui | POST /api/facturas 201 2773.406 ms - 735
+6|multicui | {"level":"info","message":"[HTTP][80cfbfa7-9a2d-406b-8ab6-bceee7a5d46d] POST /api/facturas -> 201 (2774ms)","timestamp":"2026-06-09T16:36:49.318Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/auth/session","requestId":"0c3426f2-78e7-4ad6-8bf1-a3b1376c495e"},"timestamp":"2026-06-09T16:36:59.093Z"}
+6|multicui | GET /api/auth/session 304 2.074 ms - -
+6|multicui | {"level":"info","message":"[HTTP][0c3426f2-78e7-4ad6-8bf1-a3b1376c495e] GET /api/auth/session -> 304 (2ms)","timestamp":"2026-06-09T16:36:59.096Z"}
+6|multicui | {"level":"info","message":{"method":"GET","msg":"http_in","origin":"https://facturador-multi-cuit-nine.vercel.app","path":"/api/meta/environment","requestId":"e2f2af39-d5fb-40a1-9a9d-212159604b6e"},"timestamp":"2026-06-09T16:36:59.152Z"}

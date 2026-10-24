@@ -1,0 +1,3163 @@
+[
+    {
+      "body": [
+        {
+          "id": 4742,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-27T20:25:22",
+          "date_modified": "2025-11-27T20:25:24",
+          "discount_total": "0.00",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "182434.98",
+          "total_tax": "0.00",
+          "customer_id": 3,
+          "order_key": "wc_order_UBs9CFpDwglh6",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "",
+            "address_1": "San Pedro Nolasco 6553",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "03513441382"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "186.138.34.71",
+          "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "07686d4bcdd506d4e5add65707ab96df",
+          "number": "4742",
+          "meta_data": [
+            {
+              "id": 182,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 185,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 186,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 187,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 188,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-27 20:22:31"
+            },
+            {
+              "id": 189,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "11"
+            },
+            {
+              "id": 190,
+              "key": "_wc_order_attribution_session_count",
+              "value": "1"
+            },
+            {
+              "id": 191,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0"
+            },
+            {
+              "id": 192,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Desktop"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 44,
+              "name": "Abanico  Flodra Blue Pocket",
+              "product_id": 4416,
+              "variation_id": 0,
+              "quantity": 11,
+              "tax_class": "",
+              "subtotal": "182434.98",
+              "subtotal_tax": "0.00",
+              "total": "182434.98",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": "ABA-00627",
+              "global_unique_id": "",
+              "price": 16584.9981,
+              "image": {
+                "id": "3091",
+                "src": "https://mayorista.norteabanicos.com/wp-content/uploads/2025/11/1686434359ca6226890f48f8524cfaf3d123efc3b5.jpg"
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/4742/?pay_for_order=true&key=wc_order_UBs9CFpDwglh6",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": true,
+          "date_created_gmt": "2025-11-27T20:25:22",
+          "date_modified_gmt": "2025-11-27T20:25:24",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/4742",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/4742/actions/email_templates"
+              }
+            ],
+            "customer": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/customers/3"
+              }
+            ]
+          }
+        },
+        {
+          "id": 4741,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-27T20:23:55",
+          "date_modified": "2025-11-27T20:24:09",
+          "discount_total": "0.00",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "162161.99",
+          "total_tax": "0.00",
+          "customer_id": 3,
+          "order_key": "wc_order_AzkhF8G7vI6pb",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "",
+            "address_1": "San Pedro Nolasco 6553",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "03513441382"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "186.138.34.71",
+          "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "f4bff13fd0aa2efb1f423c038852f8af",
+          "number": "4741",
+          "meta_data": [
+            {
+              "id": 171,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 174,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 175,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 176,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 177,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-27 20:22:31"
+            },
+            {
+              "id": 178,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "6"
+            },
+            {
+              "id": 179,
+              "key": "_wc_order_attribution_session_count",
+              "value": "1"
+            },
+            {
+              "id": 180,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0"
+            },
+            {
+              "id": 181,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Desktop"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 41,
+              "name": "Abanico Aromantic Pocket",
+              "product_id": 4368,
+              "variation_id": 0,
+              "quantity": 2,
+              "tax_class": "",
+              "subtotal": "29482.00",
+              "subtotal_tax": "0.00",
+              "total": "29482.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": "ABA-00850",
+              "global_unique_id": "",
+              "price": 14741,
+              "image": {
+                "id": "3005",
+                "src": "https://mayorista.norteabanicos.com/wp-content/uploads/2025/11/170265829168a1c02b12ef1dd8acbbd567600afc0b.jpg"
+              },
+              "parent_name": null
+            },
+            {
+              "id": 42,
+              "name": "Abanico  Flodra Blue &amp; Orange Pocket",
+              "product_id": 4417,
+              "variation_id": 0,
+              "quantity": 2,
+              "tax_class": "",
+              "subtotal": "33170.00",
+              "subtotal_tax": "0.00",
+              "total": "33170.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": "ABA-00626",
+              "global_unique_id": "",
+              "price": 16584.9981,
+              "image": {
+                "id": "3093",
+                "src": "https://mayorista.norteabanicos.com/wp-content/uploads/2025/11/16864343216478efdceccf2d0f86f25c9848041cde.jpg"
+              },
+              "parent_name": null
+            },
+            {
+              "id": 43,
+              "name": "Abanico  Flodra Green Pocket",
+              "product_id": 4414,
+              "variation_id": 0,
+              "quantity": 6,
+              "tax_class": "",
+              "subtotal": "99509.99",
+              "subtotal_tax": "0.00",
+              "total": "99509.99",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": "ABA-00629",
+              "global_unique_id": "",
+              "price": 16584.9981,
+              "image": {
+                "id": "3088",
+                "src": "https://mayorista.norteabanicos.com/wp-content/uploads/2025/11/16864344131d641c6aa994e921002e8122eb3a7e24.jpg"
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/4741/?pay_for_order=true&key=wc_order_AzkhF8G7vI6pb",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": true,
+          "date_created_gmt": "2025-11-27T20:23:55",
+          "date_modified_gmt": "2025-11-27T20:24:09",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/4741",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/4741/actions/email_templates"
+              }
+            ],
+            "customer": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/customers/3"
+              }
+            ]
+          }
+        },
+        {
+          "id": 4722,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-19T20:20:49",
+          "date_modified": "2025-11-19T20:20:52",
+          "discount_total": "0.00",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "49755.00",
+          "total_tax": "0.00",
+          "customer_id": 3,
+          "order_key": "wc_order_LKSTXhRLFj8ki",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "",
+            "address_1": "San Pedro Nolasco 6553",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "03513441382"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "2803:9810:b5c7:7410:40b2:17e:c508:147d",
+          "customer_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "4abf6dd36bfa4b8764bdd67ec5b2b7f6",
+          "number": "4722",
+          "meta_data": [
+            {
+              "id": 160,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 163,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 164,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 165,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 166,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-19 14:40:35"
+            },
+            {
+              "id": 167,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "19"
+            },
+            {
+              "id": 168,
+              "key": "_wc_order_attribution_session_count",
+              "value": "2"
+            },
+            {
+              "id": 169,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0"
+            },
+            {
+              "id": 170,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Desktop"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 38,
+              "name": "Abanico  Flodra Blue &amp; Orange Pocket",
+              "product_id": 4417,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "16585.00",
+              "subtotal_tax": "0.00",
+              "total": "16585.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": "ABA-00626",
+              "global_unique_id": "",
+              "price": 16584.9981,
+              "image": {
+                "id": "3093",
+                "src": "https://mayorista.norteabanicos.com/wp-content/uploads/2025/11/16864343216478efdceccf2d0f86f25c9848041cde.jpg"
+              },
+              "parent_name": null
+            },
+            {
+              "id": 39,
+              "name": "Abanico  Flodra Blue Pocket",
+              "product_id": 4416,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "16585.00",
+              "subtotal_tax": "0.00",
+              "total": "16585.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": "ABA-00627",
+              "global_unique_id": "",
+              "price": 16584.9981,
+              "image": {
+                "id": "3091",
+                "src": "https://mayorista.norteabanicos.com/wp-content/uploads/2025/11/1686434359ca6226890f48f8524cfaf3d123efc3b5.jpg"
+              },
+              "parent_name": null
+            },
+            {
+              "id": 40,
+              "name": "Abanico  Flodra Green &amp; Blue Pocket",
+              "product_id": 4415,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "16585.00",
+              "subtotal_tax": "0.00",
+              "total": "16585.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": "ABA-00628",
+              "global_unique_id": "",
+              "price": 16584.9981,
+              "image": {
+                "id": "3089",
+                "src": "https://mayorista.norteabanicos.com/wp-content/uploads/2025/11/17026718758790192f4c5d042d4e88ac6d0d478249.jpg"
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/4722/?pay_for_order=true&key=wc_order_LKSTXhRLFj8ki",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": true,
+          "date_created_gmt": "2025-11-19T20:20:49",
+          "date_modified_gmt": "2025-11-19T20:20:52",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/4722",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/4722/actions/email_templates"
+              }
+            ],
+            "customer": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/customers/3"
+              }
+            ]
+          }
+        },
+        {
+          "id": 4719,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-19T20:04:14",
+          "date_modified": "2025-11-19T20:04:16",
+          "discount_total": "0.00",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "248774.97",
+          "total_tax": "0.00",
+          "customer_id": 3,
+          "order_key": "wc_order_OBs0AOZIY0IfV",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "",
+            "address_1": "San Pedro Nolasco 6553",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "03513441382"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "2803:9810:b5c7:7410:40b2:17e:c508:147d",
+          "customer_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "1bd5a23e4489603c793ac3f7990a4fd7",
+          "number": "4719",
+          "meta_data": [
+            {
+              "id": 149,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 152,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 153,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 154,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 155,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-19 14:40:35"
+            },
+            {
+              "id": 156,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "12"
+            },
+            {
+              "id": 157,
+              "key": "_wc_order_attribution_session_count",
+              "value": "2"
+            },
+            {
+              "id": 158,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:144.0) Gecko/20100101 Firefox/144.0"
+            },
+            {
+              "id": 159,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Desktop"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 37,
+              "name": "Abanico  Flodra Blue &amp; Orange Pocket",
+              "product_id": 4417,
+              "variation_id": 0,
+              "quantity": 15,
+              "tax_class": "",
+              "subtotal": "248774.97",
+              "subtotal_tax": "0.00",
+              "total": "248774.97",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": "ABA-00626",
+              "global_unique_id": "",
+              "price": 16584.9981,
+              "image": {
+                "id": "3093",
+                "src": "https://mayorista.norteabanicos.com/wp-content/uploads/2025/11/16864343216478efdceccf2d0f86f25c9848041cde.jpg"
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/4719/?pay_for_order=true&key=wc_order_OBs0AOZIY0IfV",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": true,
+          "date_created_gmt": "2025-11-19T20:04:14",
+          "date_modified_gmt": "2025-11-19T20:04:16",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/4719",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/4719/actions/email_templates"
+              }
+            ],
+            "customer": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/customers/3"
+              }
+            ]
+          }
+        },
+        {
+          "id": 2596,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-07T19:47:05",
+          "date_modified": "2025-11-07T19:47:07",
+          "discount_total": "0.00",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "380322.88",
+          "total_tax": "0.00",
+          "customer_id": 3,
+          "order_key": "wc_order_MvGy0zmA2cNjN",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "",
+            "address_1": "San Pedro Nolasco 6553",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "03513441382"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "24.232.167.95",
+          "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "b68f64b26ef1d296852e83ed8fd48cef",
+          "number": "2596",
+          "meta_data": [
+            {
+              "id": 138,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 141,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 142,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 143,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 144,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-07 14:11:33"
+            },
+            {
+              "id": 145,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "4"
+            },
+            {
+              "id": 146,
+              "key": "_wc_order_attribution_session_count",
+              "value": "2"
+            },
+            {
+              "id": 147,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+            },
+            {
+              "id": 148,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Desktop"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 33,
+              "name": "Abanico Degradè XL",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 2,
+              "tax_class": "",
+              "subtotal": "39602.00",
+              "subtotal_tax": "0.00",
+              "total": "39602.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 19801,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            },
+            {
+              "id": 34,
+              "name": "Ecofan Standard Cosmic Trip Neón",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "19190.00",
+              "subtotal_tax": "0.00",
+              "total": "19190.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 19190,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            },
+            {
+              "id": 35,
+              "name": "Abanico Koi Black Standard",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 2,
+              "tax_class": "",
+              "subtotal": "34760.88",
+              "subtotal_tax": "0.00",
+              "total": "34760.88",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 17380.44,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            },
+            {
+              "id": 36,
+              "name": "Abanico Gloria Original Standard",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 15,
+              "tax_class": "",
+              "subtotal": "286770.00",
+              "subtotal_tax": "0.00",
+              "total": "286770.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 19118,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/2596/?pay_for_order=true&key=wc_order_MvGy0zmA2cNjN",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": false,
+          "date_created_gmt": "2025-11-07T19:47:05",
+          "date_modified_gmt": "2025-11-07T19:47:07",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2596",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2596/actions/email_templates"
+              }
+            ],
+            "customer": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/customers/3"
+              }
+            ]
+          }
+        },
+        {
+          "id": 2590,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-07T13:11:44",
+          "date_modified": "2025-11-07T13:11:46",
+          "discount_total": "0.00",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "19118.00",
+          "total_tax": "0.00",
+          "customer_id": 3,
+          "order_key": "wc_order_ohGQhZTaDWTl2",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "",
+            "address_1": "San Pedro Nolasco 6553",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "03513441382"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "186.138.34.71",
+          "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "461bcb9ac453e47f4f244f27bdc27619",
+          "number": "2590",
+          "meta_data": [
+            {
+              "id": 127,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 130,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 131,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 132,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 133,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-07 13:10:15"
+            },
+            {
+              "id": 134,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "4"
+            },
+            {
+              "id": 135,
+              "key": "_wc_order_attribution_session_count",
+              "value": "1"
+            },
+            {
+              "id": 136,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0"
+            },
+            {
+              "id": 137,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Desktop"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 32,
+              "name": "Abanico Gloria Original Standard",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "19118.00",
+              "subtotal_tax": "0.00",
+              "total": "19118.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 19118,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/2590/?pay_for_order=true&key=wc_order_ohGQhZTaDWTl2",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": false,
+          "date_created_gmt": "2025-11-07T13:11:44",
+          "date_modified_gmt": "2025-11-07T13:11:46",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2590",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2590/actions/email_templates"
+              }
+            ],
+            "customer": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/customers/3"
+              }
+            ]
+          }
+        },
+        {
+          "id": 2581,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-07T04:33:39",
+          "date_modified": "2025-11-07T04:33:41",
+          "discount_total": "0.00",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "17381.00",
+          "total_tax": "0.00",
+          "customer_id": 3,
+          "order_key": "wc_order_dQIToc95uDeie",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "",
+            "address_1": "San Pedro Nolasco 6553",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "03513441382"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "186.138.34.71",
+          "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "5f2b7e6d9b7e1c5fdf96958a0dd33a6b",
+          "number": "2581",
+          "meta_data": [
+            {
+              "id": 116,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 119,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 120,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 121,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 122,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-06 17:35:57"
+            },
+            {
+              "id": 123,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "22"
+            },
+            {
+              "id": 124,
+              "key": "_wc_order_attribution_session_count",
+              "value": "5"
+            },
+            {
+              "id": 125,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0"
+            },
+            {
+              "id": 126,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Desktop"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 31,
+              "name": "Abanico Loop Standard",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "17381.00",
+              "subtotal_tax": "0.00",
+              "total": "17381.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 17381,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/2581/?pay_for_order=true&key=wc_order_dQIToc95uDeie",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": false,
+          "date_created_gmt": "2025-11-07T04:33:39",
+          "date_modified_gmt": "2025-11-07T04:33:41",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2581",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2581/actions/email_templates"
+              }
+            ],
+            "customer": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/customers/3"
+              }
+            ]
+          }
+        },
+        {
+          "id": 2580,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-07T04:25:21",
+          "date_modified": "2025-11-07T04:25:23",
+          "discount_total": "0.00",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "19801.00",
+          "total_tax": "0.00",
+          "customer_id": 3,
+          "order_key": "wc_order_A0inUyKLHELAH",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "",
+            "address_1": "San Pedro Nolasco 6553",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "03513441382"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "2803:9800:a885:8145:7049:1d4e:a22d:f8e4",
+          "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "b30ee805f19dfbdf35f9727f9b128d37",
+          "number": "2580",
+          "meta_data": [
+            {
+              "id": 105,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 108,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 109,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 110,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 111,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-05 15:37:38"
+            },
+            {
+              "id": 112,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "2"
+            },
+            {
+              "id": 113,
+              "key": "_wc_order_attribution_session_count",
+              "value": "9"
+            },
+            {
+              "id": 114,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+            },
+            {
+              "id": 115,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Desktop"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 30,
+              "name": "Abanico Degradè XL",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "19801.00",
+              "subtotal_tax": "0.00",
+              "total": "19801.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 19801,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/2580/?pay_for_order=true&key=wc_order_A0inUyKLHELAH",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": false,
+          "date_created_gmt": "2025-11-07T04:25:21",
+          "date_modified_gmt": "2025-11-07T04:25:23",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2580",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2580/actions/email_templates"
+              }
+            ],
+            "customer": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/customers/3"
+              }
+            ]
+          }
+        },
+        {
+          "id": 2575,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-07T04:01:56",
+          "date_modified": "2025-11-07T04:01:59",
+          "discount_total": "0.00",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "19801.00",
+          "total_tax": "0.00",
+          "customer_id": 3,
+          "order_key": "wc_order_DaWyXZkvJ9Rqx",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "",
+            "address_1": "San Pedro Nolasco 6553",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "03513441382"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "186.138.34.71",
+          "customer_user_agent": "Mozilla/5.0 (Linux; Android 11; SAMSUNG SM-G973U) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/14.2 Chrome/87.0.4280.141 Mobile Safari/537.36",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "b30ee805f19dfbdf35f9727f9b128d37",
+          "number": "2575",
+          "meta_data": [
+            {
+              "id": 94,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 97,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 98,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 99,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 100,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-06 17:35:57"
+            },
+            {
+              "id": 101,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "3"
+            },
+            {
+              "id": 102,
+              "key": "_wc_order_attribution_session_count",
+              "value": "5"
+            },
+            {
+              "id": 103,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Linux; Android 11; SAMSUNG SM-G973U) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/14.2 Chrome/87.0.4280.141 Mobile Safari/537.36"
+            },
+            {
+              "id": 104,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Mobile"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 29,
+              "name": "Abanico Degradè XL",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "19801.00",
+              "subtotal_tax": "0.00",
+              "total": "19801.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 19801,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/2575/?pay_for_order=true&key=wc_order_DaWyXZkvJ9Rqx",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": false,
+          "date_created_gmt": "2025-11-07T04:01:56",
+          "date_modified_gmt": "2025-11-07T04:01:59",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2575",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2575/actions/email_templates"
+              }
+            ],
+            "customer": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/customers/3"
+              }
+            ]
+          }
+        },
+        {
+          "id": 2539,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-06T21:35:55",
+          "date_modified": "2025-11-06T21:35:57",
+          "discount_total": "0.00",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "223510.44",
+          "total_tax": "0.00",
+          "customer_id": 3,
+          "order_key": "wc_order_HmAWzixS0LddI",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "",
+            "address_1": "San Pedro Nolasco 6553",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "03513441382"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "186.138.34.71",
+          "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "319d38a1562cc97a1a0090bd1b2729f8",
+          "number": "2539",
+          "meta_data": [
+            {
+              "id": 83,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 86,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 87,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 88,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 89,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-06 17:35:57"
+            },
+            {
+              "id": 90,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "105"
+            },
+            {
+              "id": 91,
+              "key": "_wc_order_attribution_session_count",
+              "value": "1"
+            },
+            {
+              "id": 92,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0"
+            },
+            {
+              "id": 93,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Desktop"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 24,
+              "name": "Abanico Degradè XL",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "19801.00",
+              "subtotal_tax": "0.00",
+              "total": "19801.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 19801,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            },
+            {
+              "id": 25,
+              "name": "Abanico Gloria Original Standard",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "19118.00",
+              "subtotal_tax": "0.00",
+              "total": "19118.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 19118,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            },
+            {
+              "id": 26,
+              "name": "Abanico Koi Black Standard",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "17380.44",
+              "subtotal_tax": "0.00",
+              "total": "17380.44",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 17380.44,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            },
+            {
+              "id": 27,
+              "name": "Abanico Nebulosa UV Green XL",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "19801.00",
+              "subtotal_tax": "0.00",
+              "total": "19801.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 19801,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            },
+            {
+              "id": 28,
+              "name": "Abanico Manos Neón Pocket",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 10,
+              "tax_class": "",
+              "subtotal": "147410.00",
+              "subtotal_tax": "0.00",
+              "total": "147410.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 14741,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/2539/?pay_for_order=true&key=wc_order_HmAWzixS0LddI",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": false,
+          "date_created_gmt": "2025-11-06T21:35:55",
+          "date_modified_gmt": "2025-11-06T21:35:57",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2539",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2539/actions/email_templates"
+              }
+            ],
+            "customer": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/customers/3"
+              }
+            ]
+          }
+        },
+        {
+          "id": 2538,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-06T21:34:25",
+          "date_modified": "2025-11-06T21:34:27",
+          "discount_total": "0.00",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "19801.00",
+          "total_tax": "0.00",
+          "customer_id": 3,
+          "order_key": "wc_order_C5Bmqg7iG9A2o",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "",
+            "address_1": "San Pedro Nolasco 6553",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "03513441382"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "186.138.34.71",
+          "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "b30ee805f19dfbdf35f9727f9b128d37",
+          "number": "2538",
+          "meta_data": [
+            {
+              "id": 72,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 75,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 76,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 77,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 78,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-06 17:35:57"
+            },
+            {
+              "id": 79,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "101"
+            },
+            {
+              "id": 80,
+              "key": "_wc_order_attribution_session_count",
+              "value": "1"
+            },
+            {
+              "id": 81,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0"
+            },
+            {
+              "id": 82,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Desktop"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 23,
+              "name": "Abanico Degradè XL",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "19801.00",
+              "subtotal_tax": "0.00",
+              "total": "19801.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 19801,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/2538/?pay_for_order=true&key=wc_order_C5Bmqg7iG9A2o",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": false,
+          "date_created_gmt": "2025-11-06T21:34:25",
+          "date_modified_gmt": "2025-11-06T21:34:27",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2538",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2538/actions/email_templates"
+              }
+            ],
+            "customer": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/customers/3"
+              }
+            ]
+          }
+        },
+        {
+          "id": 2537,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-06T21:19:26",
+          "date_modified": "2025-11-06T21:22:23",
+          "discount_total": "959479.29",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "20.71",
+          "total_tax": "0.00",
+          "customer_id": 3,
+          "order_key": "wc_order_OoTYSElLCDDpg",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "",
+            "address_1": "San Pedro Nolasco 6553",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "03513441382"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "186.138.34.71",
+          "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "ee8d10749ffc66da5873bc03b0a30efd",
+          "number": "2537",
+          "meta_data": [
+            {
+              "id": 60,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 63,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 64,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 65,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 66,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-06 17:35:57"
+            },
+            {
+              "id": 67,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "96"
+            },
+            {
+              "id": 68,
+              "key": "_wc_order_attribution_session_count",
+              "value": "1"
+            },
+            {
+              "id": 69,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0"
+            },
+            {
+              "id": 70,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Desktop"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 22,
+              "name": "Ecofan Standard Cosmic Trip Neón",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 50,
+              "tax_class": "",
+              "subtotal": "959500.00",
+              "subtotal_tax": "0.00",
+              "total": "20.71",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 0.41428572,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/2537/?pay_for_order=true&key=wc_order_OoTYSElLCDDpg",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": false,
+          "date_created_gmt": "2025-11-06T21:19:26",
+          "date_modified_gmt": "2025-11-06T21:22:23",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2537",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2537/actions/email_templates"
+              }
+            ],
+            "customer": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/customers/3"
+              }
+            ]
+          }
+        },
+        {
+          "id": 2528,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-06T20:48:20",
+          "date_modified": "2025-11-06T21:00:54",
+          "discount_total": "0.00",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "19118.00",
+          "total_tax": "0.00",
+          "customer_id": 0,
+          "order_key": "wc_order_MZ54GaBQ8qAyS",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "Fenec Studio",
+            "address_1": "Av Colon",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "+54 9 351 755-2258"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "186.138.34.71",
+          "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "461bcb9ac453e47f4f244f27bdc27619",
+          "number": "2528",
+          "meta_data": [
+            {
+              "id": 49,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 52,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 53,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 54,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 55,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-06 17:35:57"
+            },
+            {
+              "id": 56,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "65"
+            },
+            {
+              "id": 57,
+              "key": "_wc_order_attribution_session_count",
+              "value": "1"
+            },
+            {
+              "id": 58,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0"
+            },
+            {
+              "id": 59,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Desktop"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 21,
+              "name": "Abanico Gloria Original Standard",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "19118.00",
+              "subtotal_tax": "0.00",
+              "total": "19118.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 19118,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/2528/?pay_for_order=true&key=wc_order_MZ54GaBQ8qAyS",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": false,
+          "date_created_gmt": "2025-11-06T20:48:20",
+          "date_modified_gmt": "2025-11-06T21:00:54",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2528",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2528/actions/email_templates"
+              }
+            ]
+          }
+        },
+        {
+          "id": 2521,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-06T20:27:38",
+          "date_modified": "2025-11-06T21:00:54",
+          "discount_total": "0.00",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "33859.00",
+          "total_tax": "0.00",
+          "customer_id": 0,
+          "order_key": "wc_order_Ts8CH1jHoJf98",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "Fenec Studio",
+            "address_1": "Av Colon",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "+54 9 351 755-2258"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "186.138.34.71",
+          "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "13fcf09ec68c1a4dc70b6a56ee9f40eb",
+          "number": "2521",
+          "meta_data": [
+            {
+              "id": 38,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 41,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 42,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 43,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 44,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-06 17:35:57"
+            },
+            {
+              "id": 45,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "58"
+            },
+            {
+              "id": 46,
+              "key": "_wc_order_attribution_session_count",
+              "value": "1"
+            },
+            {
+              "id": 47,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0"
+            },
+            {
+              "id": 48,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Desktop"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 19,
+              "name": "Abanico Manos Neón Pocket",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "14741.00",
+              "subtotal_tax": "0.00",
+              "total": "14741.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 14741,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            },
+            {
+              "id": 20,
+              "name": "Abanico Gloria Original Standard",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "19118.00",
+              "subtotal_tax": "0.00",
+              "total": "19118.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 19118,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/2521/?pay_for_order=true&key=wc_order_Ts8CH1jHoJf98",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": false,
+          "date_created_gmt": "2025-11-06T20:27:38",
+          "date_modified_gmt": "2025-11-06T21:00:54",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2521",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2521/actions/email_templates"
+              }
+            ]
+          }
+        },
+        {
+          "id": 2516,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-06T20:01:18",
+          "date_modified": "2025-11-06T21:00:54",
+          "discount_total": "0.00",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "53401.99",
+          "total_tax": "0.00",
+          "customer_id": 0,
+          "order_key": "wc_order_BtUSO6jhlt7yn",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "Fenec Studio",
+            "address_1": "Av Colon",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "+54 9 351 755-2258"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "186.138.34.71",
+          "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "60f5b4699a865bdeb0781855b81e20ea",
+          "number": "2516",
+          "meta_data": [
+            {
+              "id": 27,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 30,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 31,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 32,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 33,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-06 17:35:57"
+            },
+            {
+              "id": 34,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "48"
+            },
+            {
+              "id": 35,
+              "key": "_wc_order_attribution_session_count",
+              "value": "1"
+            },
+            {
+              "id": 36,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0"
+            },
+            {
+              "id": 37,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Desktop"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 16,
+              "name": "Abanico Loop Standard",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "17381.00",
+              "subtotal_tax": "0.00",
+              "total": "17381.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 17381,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            },
+            {
+              "id": 17,
+              "name": "Abanico Nebulosa UV Green XL",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "19801.00",
+              "subtotal_tax": "0.00",
+              "total": "19801.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 19801,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            },
+            {
+              "id": 18,
+              "name": "Ecofan Pocket Botanic Orange",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "16219.99",
+              "subtotal_tax": "0.00",
+              "total": "16219.99",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 16219.9895,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/2516/?pay_for_order=true&key=wc_order_BtUSO6jhlt7yn",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": false,
+          "date_created_gmt": "2025-11-06T20:01:18",
+          "date_modified_gmt": "2025-11-06T21:00:54",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2516",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2516/actions/email_templates"
+              }
+            ]
+          }
+        },
+        {
+          "id": 2507,
+          "parent_id": 0,
+          "status": "on-hold",
+          "currency": "ARS",
+          "version": "10.3.4",
+          "prices_include_tax": false,
+          "date_created": "2025-11-06T19:47:07",
+          "date_modified": "2025-11-06T21:00:54",
+          "discount_total": "0.00",
+          "discount_tax": "0.00",
+          "shipping_total": "0.00",
+          "shipping_tax": "0.00",
+          "cart_tax": "0.00",
+          "total": "245472.65",
+          "total_tax": "0.00",
+          "customer_id": 0,
+          "order_key": "wc_order_4j9LiKkI3H8Xg",
+          "billing": {
+            "first_name": "Fernando Manuel",
+            "last_name": "Tadeo Suárez",
+            "company": "Fenec Studio",
+            "address_1": "Av Colon",
+            "address_2": "",
+            "city": "Cordoba",
+            "state": "X",
+            "postcode": "X5022GX",
+            "country": "AR",
+            "email": "fernandotadeos@gmail.com",
+            "phone": "+54 9 351 755-2258"
+          },
+          "shipping": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": ""
+          },
+          "payment_method": "bacs",
+          "payment_method_title": "Transferencia bancaria directa",
+          "transaction_id": "",
+          "customer_ip_address": "186.138.34.71",
+          "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0",
+          "created_via": "checkout",
+          "customer_note": "",
+          "date_completed": null,
+          "date_paid": null,
+          "cart_hash": "aaa729967c71da22bd784920bdb7c620",
+          "number": "2507",
+          "meta_data": [
+            {
+              "id": 16,
+              "key": "is_vat_exempt",
+              "value": "no"
+            },
+            {
+              "id": 19,
+              "key": "_wc_order_attribution_source_type",
+              "value": "typein"
+            },
+            {
+              "id": 20,
+              "key": "_wc_order_attribution_utm_source",
+              "value": "(direct)"
+            },
+            {
+              "id": 21,
+              "key": "_wc_order_attribution_session_entry",
+              "value": "https://mayorista.norteabanicos.com/"
+            },
+            {
+              "id": 22,
+              "key": "_wc_order_attribution_session_start_time",
+              "value": "2025-11-06 17:35:57"
+            },
+            {
+              "id": 23,
+              "key": "_wc_order_attribution_session_pages",
+              "value": "42"
+            },
+            {
+              "id": 24,
+              "key": "_wc_order_attribution_session_count",
+              "value": "1"
+            },
+            {
+              "id": 25,
+              "key": "_wc_order_attribution_user_agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0"
+            },
+            {
+              "id": 26,
+              "key": "_wc_order_attribution_device_type",
+              "value": "Desktop"
+            }
+          ],
+          "line_items": [
+            {
+              "id": 11,
+              "name": "Abanico Degradè XL",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 4,
+              "tax_class": "",
+              "subtotal": "79204.00",
+              "subtotal_tax": "0.00",
+              "total": "79204.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 19801,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            },
+            {
+              "id": 12,
+              "name": "Ecofan Pocket Botanic Orange",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "16219.99",
+              "subtotal_tax": "0.00",
+              "total": "16219.99",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 16219.9895,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            },
+            {
+              "id": 13,
+              "name": "Abanico Vibra Fucsia Pocket",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "14740.22",
+              "subtotal_tax": "0.00",
+              "total": "14740.22",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 14740.22,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            },
+            {
+              "id": 14,
+              "name": "Abanico Manos Neón Pocket",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 8,
+              "tax_class": "",
+              "subtotal": "117928.00",
+              "subtotal_tax": "0.00",
+              "total": "117928.00",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 14741,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            },
+            {
+              "id": 15,
+              "name": "Abanico Koi Black Standard",
+              "product_id": 0,
+              "variation_id": 0,
+              "quantity": 1,
+              "tax_class": "",
+              "subtotal": "17380.44",
+              "subtotal_tax": "0.00",
+              "total": "17380.44",
+              "total_tax": "0.00",
+              "taxes": [],
+              "meta_data": [],
+              "sku": null,
+              "global_unique_id": null,
+              "price": 17380.44,
+              "image": {
+                "id": 0,
+                "src": ""
+              },
+              "parent_name": null
+            }
+          ],
+          "tax_lines": [],
+          "shipping_lines": [],
+          "fee_lines": [],
+          "coupon_lines": [],
+          "refunds": [],
+          "payment_url": "https://mayorista.norteabanicos.com/checkout/order-pay/2507/?pay_for_order=true&key=wc_order_4j9LiKkI3H8Xg",
+          "is_editable": true,
+          "needs_payment": false,
+          "needs_processing": false,
+          "date_created_gmt": "2025-11-06T19:47:07",
+          "date_modified_gmt": "2025-11-06T21:00:54",
+          "date_completed_gmt": null,
+          "date_paid_gmt": null,
+          "currency_symbol": "$",
+          "_links": {
+            "self": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2507",
+                "targetHints": {
+                  "allow": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders"
+              }
+            ],
+            "email_templates": [
+              {
+                "embeddable": true,
+                "href": "https://mayorista.norteabanicos.com/wp-json/wc/v3/orders/2507/actions/email_templates"
+              }
+            ]
+          }
+        }
+      ],
+      "headers": {
+        "connection": "close",
+        "x-powered-by": "PHP/8.2.27",
+        "content-type": "application/json; charset=UTF-8",
+        "x-robots-tag": "noindex",
+        "link": "<https://mayorista.norteabanicos.com/wp-json/>; rel=\"https://api.w.org/\"",
+        "x-content-type-options": "nosniff",
+        "access-control-expose-headers": "X-WP-Total, X-WP-TotalPages, Link",
+        "access-control-allow-headers": "Authorization, X-WP-Nonce, Content-Disposition, Content-MD5, Content-Type, X-Sli-Auth-Token",
+        "x-wp-total": "16",
+        "x-wp-totalpages": "1",
+        "allow": "GET, POST",
+        "expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "cache-control": "no-cache, must-revalidate, max-age=0, no-store, private",
+        "x-litespeed-cache-control": "private,max-age=1800",
+        "x-litespeed-tag": "c2c_tag_priv,public:c2c_default,public:c2c_URL.e6d05710c811022f0bdad31f69c65996,public:c2c_REST,public:c2c_",
+        "etag": "\"12424-1764343027;br\"",
+        "x-litespeed-cache": "miss",
+        "transfer-encoding": "chunked",
+        "vary": "Accept-Encoding",
+        "date": "Fri, 28 Nov 2025 15:17:07 GMT",
+        "server": "LiteSpeed",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "content-security-policy": "upgrade-insecure-requests",
+        "alt-svc": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+      },
+      "statusCode": 200,
+      "statusMessage": "OK"
+    }
+  ]
