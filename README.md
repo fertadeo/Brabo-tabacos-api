@@ -71,7 +71,11 @@ cd /var/www/brabo-tabacos-api
 sudo git pull
 sudo npm ci --include=dev && sudo npm run build
 test -f dist/index.js && sudo pm2 restart brabo-tabacos-api
+# Listar SIEMPRE el PM2 de root (no el de fenecstudio):
+sudo pm2 list
 ```
+
+Brabo corre en el PM2 de **root** (`PM2_HOME=/root/.pm2`). `pm2 list` sin sudo muestra otro daemon (p.ej. usuario `fenecstudio`) y no vas a ver la app.
 
 ## Levantar local
 

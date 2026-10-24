@@ -52,6 +52,16 @@ need_root() {
   if [[ "${EUID}" -ne 0 ]]; then
     die "Corré con sudo: sudo -E bash scripts/bootstrap-prod.sh"
   fi
+  # sudo -E a veces preserva HOME del usuario (fenecstudio) → PM2 cae en ~/.pm2 de ese user.
+  # Brabo debe vivir en el PM2 de root: sudo pm2 list
+  export HOME=/root
+  export PM2_HOME=/root/.pm2
+  export npm_config_prefix="${npm_config_prefix:-/usr/lib/node_modules}"
+}
+
+# Siempre el PM2 de root (daemon + dump en /root/.pm2)
+pm2_root() {
+  env HOME=/root PM2_HOME=/root/.pm2 pm2 "$@"
 }
 
 # --- Seguridad: nunca tocar BD MF prod ---
@@ -118,9 +128,14 @@ install_packages() {
   log "Node $(node -v) / npm $(npm -v)"
 
   if ! command -v pm2 >/dev/null 2>&1; then
-    log "Instalando PM2"
+    log "Instalando PM2 global (root)"
     npm install -g pm2
   fi
+  # Asegurar que el daemon no quede atado al HOME de fenecstudio
+  export HOME=/root
+  export PM2_HOME=/root/.pm2
+  mkdir -p /root/.pm2
+  log "PM2_HOME=$PM2_HOME (listar con: sudo pm2 list)"
 }
 
 clone_or_update() {
@@ -371,22 +386,26 @@ EOF
 }
 
 start_pm2() {
-  log "7/8 PM2 start/restart"
+  log "7/8 PM2 start/restart (root / PM2_HOME=/root/.pm2)"
   cd "$APP_DIR"
+  export HOME=/root
+  export PM2_HOME=/root/.pm2
+  mkdir -p /root/.pm2
   resolve_entry_js
   [[ -n "$ENTRY_JS" && -f "$ENTRY_JS" ]] || die "Antes de PM2 debe existir el entry (dist/index.js). Rebuild falló o incompleto."
   write_ecosystem
   mkdir -p logs
-  pm2 delete "$APP_NAME" 2>/dev/null || true
-  pm2 start ecosystem.config.cjs
-  # Verificar que el proceso no quede errored por módulo faltante
+  # Si quedó registrado en el PM2 de fenecstudio, no lo tocamos acá; arrancamos en root.
+  pm2_root delete "$APP_NAME" 2>/dev/null || true
+  pm2_root start ecosystem.config.cjs
   sleep 2
-  if pm2 jlist 2>/dev/null | grep -q "\"name\":\"${APP_NAME}\"" && pm2 jlist 2>/dev/null | grep -q '"status":"errored"'; then
-    pm2 logs "$APP_NAME" --lines 30 --nostream || true
-    die "PM2 quedó errored. Revisá que exista $APP_DIR/$ENTRY_JS"
+  if pm2_root jlist 2>/dev/null | grep -q "\"name\":\"${APP_NAME}\"" && pm2_root jlist 2>/dev/null | grep -q '"status":"errored"'; then
+    pm2_root logs "$APP_NAME" --lines 30 --nostream || true
+    die "PM2 (root) quedó errored. Revisá que exista $APP_DIR/$ENTRY_JS"
   fi
-  pm2 save
-  pm2 startup systemd -u root --hp /root >/dev/null 2>&1 || true
+  pm2_root save
+  pm2_root startup systemd -u root --hp /root >/dev/null 2>&1 || true
+  log "Verificar: sudo pm2 list   (no uses pm2 list como fenecstudio)"
 }
 
 maybe_nginx() {
@@ -438,8 +457,8 @@ healthcheck() {
     fi
     sleep 2
   done
-  warn "Healthcheck falló. Logs: pm2 logs $APP_NAME --lines 50"
-  pm2 logs "$APP_NAME" --lines 40 --nostream || true
+  warn "Healthcheck falló. Logs: sudo pm2 logs $APP_NAME --lines 50"
+  env HOME=/root PM2_HOME=/root/.pm2 pm2 logs "$APP_NAME" --lines 40 --nostream || true
   exit 1
 }
 
