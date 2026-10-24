@@ -43,8 +43,20 @@ El script es **idempotente**: deps (Node 20, MariaDB, PM2, nginx opcional), clon
 | `INSTALL_NGINX` | `true` | |
 | `FORCE_ENV` | `false` | `true` regenera `.env` |
 | `SKIP_DB_SEED` | `false` | |
+| `RECREATE_DB` | `false` | `true` hace `DROP DATABASE` Brabo y reimporta (útil tras fallo parcial) |
 
 Copia funcional: pasá `DB_DUMP=/path/dump.sql` (export desde Gold/MF **limpio**, sin secretos de pago). Si no hay dump → schema + `npm run seed:brabo`.
+
+### ERROR 1419 (triggers + binlog)
+
+Si el import falla con `ERROR 1419 ... log_bin_trust_function_creators`, el script intenta `SET GLOBAL log_bin_trust_function_creators = 1` como root. Si la BD quedó a medias:
+
+```bash
+# opcional manual:
+sudo mysql -e "SET GLOBAL log_bin_trust_function_creators = 1;"
+export RECREATE_DB=true
+sudo -E bash scripts/bootstrap-prod.sh
+```
 
 ## Levantar local
 
