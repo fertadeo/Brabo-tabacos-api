@@ -1,143 +1,132 @@
--- Brabo: columnas de products requeridas por la API actual (idempotente).
--- Corrige: Unknown column 'iva_rate' in 'field list' al crear productos.
+-- Brabo: columnas products / sale_items / order_items (idempotente, sin procedures).
 -- Uso:
---   cd ~/Brabo-tabacos-api
 --   set -a; source .env; set +a
 --   mysql -h"${DB_HOST:-127.0.0.1}" -P"${DB_PORT:-3306}" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" \
 --     < migrations/2026-10-26_brabo_products_columns.sql
 
-DELIMITER //
-
-DROP PROCEDURE IF EXISTS brabo_add_column_if_missing //
-CREATE PROCEDURE brabo_add_column_if_missing(
-  IN p_table VARCHAR(64),
-  IN p_column VARCHAR(64),
-  IN p_definition TEXT
-)
-BEGIN
-  IF EXISTS (
-    SELECT 1
-    FROM information_schema.TABLES
-    WHERE TABLE_SCHEMA = DATABASE()
-      AND TABLE_NAME = p_table
-  ) AND NOT EXISTS (
-    SELECT 1
-    FROM information_schema.COLUMNS
-    WHERE TABLE_SCHEMA = DATABASE()
-      AND TABLE_NAME = p_table
-      AND COLUMN_NAME = p_column
-  ) THEN
-    SET @ddl = CONCAT('ALTER TABLE `', p_table, '` ADD COLUMN ', p_definition);
-    PREPARE stmt FROM @ddl;
-    EXECUTE stmt;
-    DEALLOCATE PREPARE stmt;
-  END IF;
-END //
-
-DROP PROCEDURE IF EXISTS brabo_add_index_if_missing //
-CREATE PROCEDURE brabo_add_index_if_missing(
-  IN p_table VARCHAR(64),
-  IN p_index VARCHAR(64),
-  IN p_definition TEXT
-)
-BEGIN
-  IF EXISTS (
-    SELECT 1
-    FROM information_schema.TABLES
-    WHERE TABLE_SCHEMA = DATABASE()
-      AND TABLE_NAME = p_table
-  ) AND NOT EXISTS (
-    SELECT 1
-    FROM information_schema.STATISTICS
-    WHERE TABLE_SCHEMA = DATABASE()
-      AND TABLE_NAME = p_table
-      AND INDEX_NAME = p_index
-  ) THEN
-    SET @ddl = CONCAT('ALTER TABLE `', p_table, '` ADD ', p_definition);
-    PREPARE stmt FROM @ddl;
-    EXECUTE stmt;
-    DEALLOCATE PREPARE stmt;
-  END IF;
-END //
-
-DELIMITER ;
-
-CALL brabo_add_column_if_missing(
-  'products',
-  'iva_rate',
-  '`iva_rate` decimal(4,2) NOT NULL DEFAULT 21.00 COMMENT ''Alícuota IVA: 21, 10.5 o 0'' AFTER `price`'
+-- products.iva_rate
+SET @sql := (
+  SELECT IF(
+    COUNT(*) = 0,
+    'ALTER TABLE `products` ADD COLUMN `iva_rate` decimal(4,2) NOT NULL DEFAULT 21.00 COMMENT ''Alícuota IVA: 21, 10.5 o 0'' AFTER `price`',
+    'SELECT ''products.iva_rate ok'' AS info'
+  )
+  FROM information_schema.COLUMNS
+  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'products' AND COLUMN_NAME = 'iva_rate'
 );
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
-CALL brabo_add_column_if_missing(
-  'products',
-  'woocommerce_image_ids',
-  '`woocommerce_image_ids` json DEFAULT NULL'
+-- products.woocommerce_image_ids
+SET @sql := (
+  SELECT IF(
+    COUNT(*) = 0,
+    'ALTER TABLE `products` ADD COLUMN `woocommerce_image_ids` json DEFAULT NULL',
+    'SELECT ''products.woocommerce_image_ids ok'' AS info'
+  )
+  FROM information_schema.COLUMNS
+  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'products' AND COLUMN_NAME = 'woocommerce_image_ids'
 );
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
-CALL brabo_add_column_if_missing(
-  'products',
-  'woocommerce_json',
-  '`woocommerce_json` json DEFAULT NULL'
+-- products.woocommerce_json
+SET @sql := (
+  SELECT IF(
+    COUNT(*) = 0,
+    'ALTER TABLE `products` ADD COLUMN `woocommerce_json` json DEFAULT NULL',
+    'SELECT ''products.woocommerce_json ok'' AS info'
+  )
+  FROM information_schema.COLUMNS
+  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'products' AND COLUMN_NAME = 'woocommerce_json'
 );
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
-CALL brabo_add_column_if_missing(
-  'products',
-  'woocommerce_slug',
-  '`woocommerce_slug` varchar(255) DEFAULT NULL'
+-- products.woocommerce_slug
+SET @sql := (
+  SELECT IF(
+    COUNT(*) = 0,
+    'ALTER TABLE `products` ADD COLUMN `woocommerce_slug` varchar(255) DEFAULT NULL',
+    'SELECT ''products.woocommerce_slug ok'' AS info'
+  )
+  FROM information_schema.COLUMNS
+  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'products' AND COLUMN_NAME = 'woocommerce_slug'
 );
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
-CALL brabo_add_column_if_missing(
-  'products',
-  'woocommerce_permalink',
-  '`woocommerce_permalink` varchar(512) DEFAULT NULL'
+-- products.woocommerce_permalink
+SET @sql := (
+  SELECT IF(
+    COUNT(*) = 0,
+    'ALTER TABLE `products` ADD COLUMN `woocommerce_permalink` varchar(512) DEFAULT NULL',
+    'SELECT ''products.woocommerce_permalink ok'' AS info'
+  )
+  FROM information_schema.COLUMNS
+  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'products' AND COLUMN_NAME = 'woocommerce_permalink'
 );
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
-CALL brabo_add_column_if_missing(
-  'products',
-  'allow_backorders',
-  '`allow_backorders` tinyint(1) NOT NULL DEFAULT 0 COMMENT ''Permitir reservas con stock 0 (venta por encargo)'''
+-- products.allow_backorders
+SET @sql := (
+  SELECT IF(
+    COUNT(*) = 0,
+    'ALTER TABLE `products` ADD COLUMN `allow_backorders` tinyint(1) NOT NULL DEFAULT 0 COMMENT ''Permitir reservas con stock 0''',
+    'SELECT ''products.allow_backorders ok'' AS info'
+  )
+  FROM information_schema.COLUMNS
+  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'products' AND COLUMN_NAME = 'allow_backorders'
 );
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
-CALL brabo_add_index_if_missing(
-  'products',
-  'idx_products_woocommerce_slug',
-  'INDEX `idx_products_woocommerce_slug` (`woocommerce_slug`)'
+-- indexes (solo si no existen)
+SET @sql := (
+  SELECT IF(
+    COUNT(*) = 0,
+    'ALTER TABLE `products` ADD INDEX `idx_products_woocommerce_slug` (`woocommerce_slug`)',
+    'SELECT ''idx_products_woocommerce_slug ok'' AS info'
+  )
+  FROM information_schema.STATISTICS
+  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'products' AND INDEX_NAME = 'idx_products_woocommerce_slug'
 );
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
-CALL brabo_add_index_if_missing(
-  'products',
-  'idx_products_woocommerce_permalink',
-  'INDEX `idx_products_woocommerce_permalink` (`woocommerce_permalink`(191))'
+SET @sql := (
+  SELECT IF(
+    COUNT(*) = 0,
+    'ALTER TABLE `products` ADD INDEX `idx_products_woocommerce_permalink` (`woocommerce_permalink`(191))',
+    'SELECT ''idx_products_woocommerce_permalink ok'' AS info'
+  )
+  FROM information_schema.STATISTICS
+  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'products' AND INDEX_NAME = 'idx_products_woocommerce_permalink'
 );
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
--- sale_items / order_items: directo (sin PREPARE+CALL anidados)
-CALL brabo_add_column_if_missing(
-  'sale_items',
-  'iva_rate',
-  '`iva_rate` decimal(4,2) NULL COMMENT ''Alícuota IVA al momento de la venta'' AFTER `total_price`'
+-- sale_items.iva_rate (si existe la tabla)
+SET @sql := (
+  SELECT IF(
+    (SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'sale_items') > 0
+    AND (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'sale_items' AND COLUMN_NAME = 'iva_rate') = 0,
+    'ALTER TABLE `sale_items` ADD COLUMN `iva_rate` decimal(4,2) NULL COMMENT ''Alícuota IVA al momento de la venta'' AFTER `total_price`',
+    'SELECT ''sale_items.iva_rate ok'' AS info'
+  )
 );
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
-CALL brabo_add_column_if_missing(
-  'order_items',
-  'iva_rate',
-  '`iva_rate` decimal(4,2) NULL COMMENT ''Alícuota IVA al momento del pedido'' AFTER `total_price`'
+-- order_items.iva_rate (si existe la tabla)
+SET @sql := (
+  SELECT IF(
+    (SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'order_items') > 0
+    AND (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'order_items' AND COLUMN_NAME = 'iva_rate') = 0,
+    'ALTER TABLE `order_items` ADD COLUMN `iva_rate` decimal(4,2) NULL COMMENT ''Alícuota IVA al momento del pedido'' AFTER `total_price`',
+    'SELECT ''order_items.iva_rate ok'' AS info'
+  )
 );
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
--- Backfill solo si la columna existe
-SET @has_sale_iva := (
-  SELECT COUNT(*) FROM information_schema.COLUMNS
-  WHERE TABLE_SCHEMA = DATABASE()
-    AND TABLE_NAME = 'sale_items'
-    AND COLUMN_NAME = 'iva_rate'
+-- backfill sale_items
+SET @sql := (
+  SELECT IF(
+    (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'sale_items' AND COLUMN_NAME = 'iva_rate') > 0,
+    'UPDATE `sale_items` SET `iva_rate` = 21.00 WHERE `iva_rate` IS NULL',
+    'SELECT ''skip sale_items backfill'' AS info'
+  )
 );
-SET @sql := IF(
-  @has_sale_iva > 0,
-  'UPDATE `sale_items` SET `iva_rate` = 21.00 WHERE `iva_rate` IS NULL',
-  'SELECT ''skip sale_items iva backfill'' AS info'
-);
-PREPARE stmt FROM @sql;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-DROP PROCEDURE IF EXISTS brabo_add_column_if_missing;
-DROP PROCEDURE IF EXISTS brabo_add_index_if_missing;
+PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
