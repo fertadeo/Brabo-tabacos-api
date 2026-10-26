@@ -97,7 +97,7 @@ export interface CreateOrderData {
   woocommerce_order_id?: number; // ID del pedido en WooCommerce (para evitar duplicados)
   canal_venta?: string; // 'woocommerce', 'local', etc.
   json?: any; // JSON completo con todos los datos de la orden
-  status?: 'pendiente_preparacion' | 'listo_despacho' | 'pagado' | 'aprobado';
+  status?: 'pendiente_preparacion' | 'listo_despacho' | 'pagado' | 'aprobado' | 'en_proceso' | 'completado' | 'cancelado';
   sync_to_woocommerce?: boolean; // ⭐ NUEVO: Flag para controlar sincronización (por defecto true)
   delivery_date?: string;
   delivery_address?: string;

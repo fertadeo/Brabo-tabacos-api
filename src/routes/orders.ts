@@ -3,156 +3,186 @@ import { OrderController } from '../controllers/orderController';
 import { body, param, query } from 'express-validator';
 import { validate } from '../middleware/validation';
 import { authenticateApiKey } from '../middleware/auth';
+import { authenticateJWT, authorizeRoles } from '../middleware/jwt';
 
 const router = Router();
 const orderController = new OrderController();
 
-// =====================================================
-// VALIDACIONES
-// =====================================================
+const ORDER_VIEW = ['admin', 'gerencia', 'ventas', 'logistica', 'finanzas', 'manager', 'employee', 'viewer'] as const;
+const ORDER_MANAGE = ['admin', 'gerencia', 'ventas', 'logistica'] as const;
 
-// Validación para crear pedido
 const createOrderValidation = [
   body('client_id').isInt({ min: 1 }).withMessage('client_id debe ser un entero positivo'),
-  body('status').optional().isIn(['pendiente_preparacion', 'listo_despacho', 'pagado', 'aprobado']).withMessage('Estado inválido'),
-  body('delivery_date').optional().isISO8601().withMessage('Fecha de entrega inválida'),
-  body('delivery_address').optional().isString().isLength({ max: 500 }).withMessage('Dirección de entrega inválida'),
-  body('delivery_city').optional().isString().isLength({ max: 100 }).withMessage('Ciudad inválida'),
-  body('delivery_contact').optional().isString().isLength({ max: 100 }).withMessage('Contacto inválido'),
-  body('delivery_phone').optional().isString().isLength({ max: 20 }).withMessage('Teléfono inválido'),
-  body('transport_company').optional().isString().isLength({ max: 100 }).withMessage('Empresa de transporte inválida'),
-  body('transport_cost').optional().isFloat({ min: 0 }).withMessage('Costo de transporte debe ser un número positivo'),
-  body('notes').optional().isString().isLength({ max: 1000 }).withMessage('Notas inválidas'),
+  body('status')
+    .optional()
+    .isIn(['pendiente_preparacion', 'listo_despacho', 'pagado', 'aprobado', 'pendiente', 'en_proceso'])
+    .withMessage('Estado inválido'),
+  body('delivery_date').optional({ nullable: true, checkFalsy: true }).isISO8601().withMessage('Fecha de entrega inválida'),
+  body('delivery_address').optional({ checkFalsy: true }).isString().isLength({ max: 500 }),
+  body('delivery_city').optional({ checkFalsy: true }).isString().isLength({ max: 100 }),
+  body('delivery_contact').optional({ checkFalsy: true }).isString().isLength({ max: 100 }),
+  body('delivery_phone').optional({ checkFalsy: true }).isString().isLength({ max: 20 }),
+  body('transport_company').optional({ checkFalsy: true }).isString().isLength({ max: 100 }),
+  body('transport_cost').optional({ nullable: true }).isFloat({ min: 0 }),
+  body('notes').optional({ checkFalsy: true }).isString().isLength({ max: 1000 }),
   body('items').isArray({ min: 1 }).withMessage('Debe incluir al menos un item'),
   body('items.*.product_id').isInt({ min: 1 }).withMessage('product_id debe ser un entero positivo'),
-  body('items.*.quantity').isInt({ min: 1 }).withMessage('quantity debe ser un entero positivo'),
-  body('items.*.unit_price').isFloat({ min: 0 }).withMessage('unit_price debe ser un número positivo'),
-  body('items.*.batch_number').optional().isString().isLength({ max: 50 }).withMessage('Número de lote inválido'),
-  body('items.*.notes').optional().isString().isLength({ max: 500 }).withMessage('Notas del item inválidas')
+  body('items.*.quantity').isFloat({ min: 0.01 }).withMessage('quantity debe ser positiva'),
+  body('items.*.unit_price').isFloat({ min: 0 }).withMessage('unit_price debe ser un número >= 0'),
+  body('items.*.iva_rate').optional().isFloat({ min: 0, max: 100 }),
+  body('items.*.notes').optional({ checkFalsy: true }).isString().isLength({ max: 500 }),
 ];
 
-// Validación para actualizar pedido
 const updateOrderValidation = [
   param('id').isInt({ min: 1 }).withMessage('ID de pedido inválido'),
-  body('status').optional().isIn(['pendiente_preparacion', 'listo_despacho', 'pagado', 'aprobado', 'en_proceso', 'completado', 'cancelado']).withMessage('Estado inválido'),
-  body('delivery_date').optional().isISO8601().withMessage('Fecha de entrega inválida'),
-  body('delivery_address').optional().isString().isLength({ max: 500 }).withMessage('Dirección de entrega inválida'),
-  body('delivery_city').optional().isString().isLength({ max: 100 }).withMessage('Ciudad inválida'),
-  body('delivery_contact').optional().isString().isLength({ max: 100 }).withMessage('Contacto inválido'),
-  body('delivery_phone').optional().isString().isLength({ max: 20 }).withMessage('Teléfono inválido'),
-  body('transport_company').optional().isString().isLength({ max: 100 }).withMessage('Empresa de transporte inválida'),
-  body('transport_cost').optional().isFloat({ min: 0 }).withMessage('Costo de transporte debe ser un número positivo'),
-  body('notes').optional().isString().isLength({ max: 1000 }).withMessage('Notas inválidas'),
-  body('remito_status').optional().isIn(['sin_remito', 'remito_generado', 'remito_despachado', 'remito_entregado']).withMessage('Estado de remito inválido'),
-  body('stock_reserved').optional().isBoolean().withMessage('stock_reserved debe ser booleano')
+  body('status')
+    .optional()
+    .isIn([
+      'pendiente_preparacion',
+      'listo_despacho',
+      'pagado',
+      'aprobado',
+      'en_proceso',
+      'completado',
+      'cancelado',
+    ])
+    .withMessage('Estado inválido'),
+  body('delivery_date').optional({ nullable: true, checkFalsy: true }).isISO8601(),
+  body('delivery_address').optional({ checkFalsy: true }).isString().isLength({ max: 500 }),
+  body('delivery_city').optional({ checkFalsy: true }).isString().isLength({ max: 100 }),
+  body('delivery_contact').optional({ checkFalsy: true }).isString().isLength({ max: 100 }),
+  body('delivery_phone').optional({ checkFalsy: true }).isString().isLength({ max: 20 }),
+  body('transport_company').optional({ checkFalsy: true }).isString().isLength({ max: 100 }),
+  body('transport_cost').optional({ nullable: true }).isFloat({ min: 0 }),
+  body('notes').optional({ checkFalsy: true }).isString().isLength({ max: 1000 }),
+  body('remito_status')
+    .optional()
+    .isIn(['sin_remito', 'remito_generado', 'remito_despachado', 'remito_entregado']),
+  body('stock_reserved').optional().isBoolean(),
 ];
 
-// Validación para parámetros de ID
-const idParamValidation = [
-  param('id').isInt({ min: 1 }).withMessage('ID debe ser un entero positivo')
-];
+const idParamValidation = [param('id').isInt({ min: 1 }).withMessage('ID debe ser un entero positivo')];
 
-// Validación para filtros de pedidos
 const orderFiltersValidation = [
-  query('status').optional().isIn(['pendiente_preparacion', 'listo_despacho', 'pagado', 'aprobado', 'en_proceso', 'completado', 'cancelado']).withMessage('Estado inválido'),
-  query('client_id').optional().isInt({ min: 1 }).withMessage('client_id debe ser un entero positivo'),
-  query('remito_status').optional().isIn(['sin_remito', 'remito_generado', 'remito_despachado', 'remito_entregado']).withMessage('Estado de remito inválido'),
-  query('date_from').optional().isISO8601().withMessage('Fecha desde inválida'),
-  query('date_to').optional().isISO8601().withMessage('Fecha hasta inválida'),
-  query('stock_reserved').optional().isBoolean().withMessage('stock_reserved debe ser booleano'),
-  query('has_remito').optional().isBoolean().withMessage('has_remito debe ser booleano'),
-  query('page').optional().isInt({ min: 1 }).withMessage('Página debe ser un entero positivo'),
-  query('limit').optional().isInt({ min: 1, max: 100 }).withMessage('Límite debe ser entre 1 y 100')
+  query('status')
+    .optional()
+    .isIn([
+      'pendiente_preparacion',
+      'listo_despacho',
+      'pagado',
+      'aprobado',
+      'en_proceso',
+      'completado',
+      'cancelado',
+    ]),
+  query('client_id').optional().isInt({ min: 1 }),
+  query('remito_status')
+    .optional()
+    .isIn(['sin_remito', 'remito_generado', 'remito_despachado', 'remito_entregado']),
+  query('date_from').optional().isISO8601(),
+  query('date_to').optional().isISO8601(),
+  query('stock_reserved').optional().isBoolean(),
+  query('has_remito').optional().isBoolean(),
+  query('page').optional().isInt({ min: 1 }),
+  query('limit').optional().isInt({ min: 1, max: 100 }),
 ];
 
-// =====================================================
-// RUTAS DE PEDIDOS
-// =====================================================
-
-// POST /api/orders - Crear nuevo pedido
-router.post('/',
-  authenticateApiKey,
+// CRUD ERP: JWT
+router.post(
+  '/',
+  authenticateJWT,
+  authorizeRoles(...ORDER_MANAGE),
   validate(createOrderValidation),
   orderController.createOrder.bind(orderController)
 );
 
-// GET /api/orders - Obtener todos los pedidos con filtros (sin autenticación)
-router.get('/',
+router.get(
+  '/',
+  authenticateJWT,
+  authorizeRoles(...ORDER_VIEW),
   validate(orderFiltersValidation),
   orderController.getAllOrders.bind(orderController)
 );
 
-// GET /api/orders/stats - Obtener estadísticas del módulo (sin autenticación)
-router.get('/stats',
+router.get(
+  '/stats',
+  authenticateJWT,
+  authorizeRoles(...ORDER_VIEW),
   orderController.getOrderStats.bind(orderController)
 );
 
-// GET /api/orders/config - Obtener configuración del módulo (sin autenticación)
-router.get('/config',
+router.get(
+  '/config',
+  authenticateJWT,
+  authorizeRoles(...ORDER_VIEW),
   orderController.getOrdersConfig.bind(orderController)
 );
 
-// GET /api/orders/ready-for-remito - Obtener pedidos listos para remito (sin autenticación)
-router.get('/ready-for-remito',
+router.get(
+  '/ready-for-remito',
+  authenticateJWT,
+  authorizeRoles(...ORDER_VIEW),
   orderController.getOrdersReadyForRemito.bind(orderController)
 );
 
-// GET /api/orders/:id - Obtener pedido por ID (sin autenticación)
-router.get('/:id',
+router.get(
+  '/:id',
+  authenticateJWT,
+  authorizeRoles(...ORDER_VIEW),
   validate(idParamValidation),
   orderController.getOrderById.bind(orderController)
 );
 
-// GET /api/orders/number/:number - Obtener pedido por número (sin autenticación)
-router.get('/number/:number',
+router.get(
+  '/number/:number',
+  authenticateJWT,
+  authorizeRoles(...ORDER_VIEW),
   orderController.getOrderByNumber.bind(orderController)
 );
 
-// PUT /api/orders/:id - Actualizar pedido
-router.put('/:id',
-  authenticateApiKey,
+router.put(
+  '/:id',
+  authenticateJWT,
+  authorizeRoles(...ORDER_MANAGE),
   validate(updateOrderValidation),
   orderController.updateOrder.bind(orderController)
 );
 
-// DELETE /api/orders/:id - Eliminar pedido
-router.delete('/:id',
-  authenticateApiKey,
+router.delete(
+  '/:id',
+  authenticateJWT,
+  authorizeRoles(...ORDER_MANAGE),
   validate(idParamValidation),
   orderController.deleteOrder.bind(orderController)
 );
 
-// =====================================================
-// RUTAS DE OPERACIONES ESPECIALES
-// =====================================================
-
-// POST /api/orders/:id/reserve-stock - Reservar stock para pedido
-router.post('/:id/reserve-stock',
-  authenticateApiKey,
+router.post(
+  '/:id/reserve-stock',
+  authenticateJWT,
+  authorizeRoles(...ORDER_MANAGE),
   validate(idParamValidation),
   orderController.reserveStock.bind(orderController)
 );
 
-// PUT /api/orders/:id/remito-status - Actualizar estado de remito
-router.put('/:id/remito-status',
-  authenticateApiKey,
+router.put(
+  '/:id/remito-status',
+  authenticateJWT,
+  authorizeRoles(...ORDER_MANAGE),
   validate([
     ...idParamValidation,
-    body('remitoStatus').isIn(['sin_remito', 'remito_generado', 'remito_despachado', 'remito_entregado']).withMessage('Estado de remito inválido')
+    body('remitoStatus')
+      .isIn(['sin_remito', 'remito_generado', 'remito_despachado', 'remito_entregado'])
+      .withMessage('Estado de remito inválido'),
   ]),
   orderController.updateRemitoStatus.bind(orderController)
 );
 
-// =====================================================
-// RUTAS DE SINCRONIZACIÓN CON WOOCOMMERCE
-// =====================================================
-
-// POST /api/orders/:id/sync-to-woocommerce - Sincronizar pedido a WooCommerce manualmente
-router.post('/:id/sync-to-woocommerce',
+// Integraciones Woo / n8n: API key
+router.post(
+  '/:id/sync-to-woocommerce',
   authenticateApiKey,
   validate(idParamValidation),
   orderController.syncOrderToWooCommerce.bind(orderController)
 );
 
 export default router;
-
