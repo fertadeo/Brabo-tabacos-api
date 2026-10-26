@@ -8,7 +8,7 @@ const controller = new PriceListController();
 router.get(
   '/',
   authenticateJWT,
-  authorizeRoles('gerencia', 'ventas', 'logistica', 'finanzas'),
+  authorizeRoles('admin', 'gerencia', 'ventas', 'logistica', 'finanzas'),
   controller.getAll.bind(controller)
 );
 

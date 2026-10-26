@@ -9,6 +9,13 @@ const router = Router();
 const productController = new ProductController();
 const productPricingController = new ProductPricingController();
 
+/** Lectura de catálogo / stock / barcode */
+const PRODUCT_VIEW_ROLES = ['admin', 'gerencia', 'ventas', 'logistica', 'finanzas'] as const;
+/** Alta, edición, sync WooCommerce y ajustes de precio */
+const PRODUCT_MANAGE_ROLES = ['admin', 'gerencia'] as const;
+/** Ajuste de stock */
+const PRODUCT_STOCK_ROLES = ['admin', 'gerencia', 'logistica'] as const;
+
 // Validation rules
 const createProductValidation = [
   body('code').notEmpty().withMessage('Código es requerido'),
@@ -132,94 +139,94 @@ const dollarAdjustmentValidation = [
 // Autenticación requerida para todos los endpoints de productos
 router.use(authenticateJWT);
 
-// Lecturas: gerencia, ventas, logistica, finanzas
-router.get('/', authorizeRoles('gerencia', 'ventas', 'logistica', 'finanzas'), productController.getAllProducts.bind(productController));
-router.get('/stats', authorizeRoles('gerencia', 'ventas', 'logistica', 'finanzas'), productController.getProductStats.bind(productController));
-router.get('/stock/low', authorizeRoles('gerencia', 'ventas', 'logistica', 'finanzas'), productController.getLowStockProducts.bind(productController));
+// Lecturas: admin, gerencia, ventas, logistica, finanzas
+router.get('/', authorizeRoles(...PRODUCT_VIEW_ROLES), productController.getAllProducts.bind(productController));
+router.get('/stats', authorizeRoles(...PRODUCT_VIEW_ROLES), productController.getProductStats.bind(productController));
+router.get('/stock/low', authorizeRoles(...PRODUCT_VIEW_ROLES), productController.getLowStockProducts.bind(productController));
 router.post('/woocommerce/backfill-slugs',
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   validate(backfillWooCommerceValidation),
   productController.backfillWooCommerceSlugs.bind(productController)
 );
 
-// Actualización de precios por lote (solo gerencia)
+// Actualización de precios por lote (admin / gerencia)
 router.get('/pricing/categories',
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   productPricingController.getCategoriesForPricing.bind(productPricingController)
 );
 router.get('/pricing/dollar-rate',
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   productPricingController.getDollarRate.bind(productPricingController)
 );
 router.post('/pricing/category-adjustment/preview',
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   validate(categoryAdjustmentValidation),
   productPricingController.previewCategoryAdjustment.bind(productPricingController)
 );
 router.post('/pricing/category-adjustment',
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   validate(categoryAdjustmentValidation),
   productPricingController.applyCategoryAdjustment.bind(productPricingController)
 );
 router.post('/pricing/dollar-adjustment/preview',
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   validate(dollarAdjustmentValidation),
   productPricingController.previewDollarAdjustment.bind(productPricingController)
 );
 router.post('/pricing/dollar-adjustment',
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   validate(dollarAdjustmentValidation),
   productPricingController.applyDollarAdjustment.bind(productPricingController)
 );
 router.get('/:id/woocommerce-json',
-  authorizeRoles('gerencia', 'ventas', 'logistica', 'finanzas'),
+  authorizeRoles(...PRODUCT_VIEW_ROLES),
   param('id').isInt().withMessage('ID debe ser un número entero'),
   validate([param('id').isInt().withMessage('ID debe ser un número entero')]),
   productController.getWooCommerceJson.bind(productController)
 );
 router.get('/:id', 
-  authorizeRoles('gerencia', 'ventas', 'logistica', 'finanzas'),
+  authorizeRoles(...PRODUCT_VIEW_ROLES),
   param('id').isInt().withMessage('ID debe ser un número entero'),
   validate([param('id').isInt().withMessage('ID debe ser un número entero')]),
   productController.getProductById.bind(productController)
 );
 
-// Crear/Actualizar/Eliminar productos: solo gerencia
+// Crear/Actualizar/Eliminar productos: admin y gerencia
 router.post('/', 
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   createProductValidation,
   validate(createProductValidation),
   productController.createProduct.bind(productController)
 );
 router.put('/:id', 
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   updateProductValidation,
   validate(updateProductValidation),
   productController.updateProduct.bind(productController)
 );
 router.post('/link-woocommerce-ids',
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   productController.bulkLinkProductsFromWooCommerce.bind(productController)
 );
 router.post('/:id/link-woocommerce',
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   validate(linkWooCommerceValidation),
   productController.linkProductToWooCommerce.bind(productController)
 );
 router.post('/:id/sync-to-woocommerce',
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   param('id').isInt().withMessage('ID debe ser un número entero'),
   validate([param('id').isInt().withMessage('ID debe ser un número entero')]),
   productController.syncProductToWooCommerce.bind(productController)
 );
 router.delete('/:id', 
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   param('id').isInt().withMessage('ID debe ser un número entero'),
   validate([param('id').isInt().withMessage('ID debe ser un número entero')]),
   productController.deleteProduct.bind(productController)
 );
 router.delete('/:id/permanent', 
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   param('id').isInt().withMessage('ID debe ser un número entero'),
   validate([param('id').isInt().withMessage('ID debe ser un número entero')]),
   productController.permanentDeleteProduct.bind(productController)
@@ -227,7 +234,7 @@ router.delete('/:id/permanent',
 
 // Actualización de stock: gerencia y logistica
 router.put('/:id/stock', 
-  authorizeRoles('gerencia', 'logistica'),
+  authorizeRoles(...PRODUCT_STOCK_ROLES),
   updateStockValidation,
   validate(updateStockValidation),
   productController.updateStock.bind(productController)
@@ -261,28 +268,28 @@ const createFromBarcodeValidation = [
 
 // GET /api/products/barcode/:code - Buscar por código de barras
 router.get('/barcode/:code',
-  authorizeRoles('gerencia', 'ventas', 'logistica', 'finanzas'),
+  authorizeRoles(...PRODUCT_VIEW_ROLES),
   validate(barcodeValidation),
   productController.getProductByBarcode.bind(productController)
 );
 
 // POST /api/products/barcode/:code/accept - Aceptar datos y crear producto
 router.post('/barcode/:code/accept',
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   validate(acceptBarcodeValidation),
   productController.acceptBarcodeData.bind(productController)
 );
 
 // POST /api/products/barcode/:code/create - Modificar datos y crear producto
 router.post('/barcode/:code/create',
-  authorizeRoles('gerencia'),
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
   validate(createFromBarcodeValidation),
   productController.createProductFromBarcode.bind(productController)
 );
 
 // POST /api/products/barcode/:code/ignore - Ignorar datos encontrados
 router.post('/barcode/:code/ignore',
-  authorizeRoles('gerencia', 'ventas', 'logistica', 'finanzas'),
+  authorizeRoles(...PRODUCT_VIEW_ROLES),
   validate(barcodeValidation),
   productController.ignoreBarcodeData.bind(productController)
 );
