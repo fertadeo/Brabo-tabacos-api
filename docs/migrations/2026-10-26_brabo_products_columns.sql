@@ -1,7 +1,7 @@
 -- Brabo: columnas de products requeridas por la API actual (idempotente).
 -- Corrige: Unknown column 'iva_rate' in 'field list' al crear productos.
 -- Uso:
---   cd ~/Brabo-tabacos-api   # o /var/www/brabo-tabacos-api
+--   cd ~/Brabo-tabacos-api
 --   set -a; source .env; set +a
 --   mysql -h"${DB_HOST:-127.0.0.1}" -P"${DB_PORT:-3306}" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" \
 --     < migrations/2026-10-26_brabo_products_columns.sql
@@ -15,7 +15,12 @@ CREATE PROCEDURE brabo_add_column_if_missing(
   IN p_definition TEXT
 )
 BEGIN
-  IF NOT EXISTS (
+  IF EXISTS (
+    SELECT 1
+    FROM information_schema.TABLES
+    WHERE TABLE_SCHEMA = DATABASE()
+      AND TABLE_NAME = p_table
+  ) AND NOT EXISTS (
     SELECT 1
     FROM information_schema.COLUMNS
     WHERE TABLE_SCHEMA = DATABASE()
@@ -36,7 +41,12 @@ CREATE PROCEDURE brabo_add_index_if_missing(
   IN p_definition TEXT
 )
 BEGIN
-  IF NOT EXISTS (
+  IF EXISTS (
+    SELECT 1
+    FROM information_schema.TABLES
+    WHERE TABLE_SCHEMA = DATABASE()
+      AND TABLE_NAME = p_table
+  ) AND NOT EXISTS (
     SELECT 1
     FROM information_schema.STATISTICS
     WHERE TABLE_SCHEMA = DATABASE()
@@ -100,32 +110,34 @@ CALL brabo_add_index_if_missing(
   'INDEX `idx_products_woocommerce_permalink` (`woocommerce_permalink`(191))'
 );
 
--- sale_items / order_items: iva_rate (si las tablas existen)
-SET @has_sale_items := (
-  SELECT COUNT(*) FROM information_schema.TABLES
-  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'sale_items'
-);
-SET @has_order_items := (
-  SELECT COUNT(*) FROM information_schema.TABLES
-  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'order_items'
+-- sale_items / order_items: directo (sin PREPARE+CALL anidados)
+CALL brabo_add_column_if_missing(
+  'sale_items',
+  'iva_rate',
+  '`iva_rate` decimal(4,2) NULL COMMENT ''Alícuota IVA al momento de la venta'' AFTER `total_price`'
 );
 
--- sale_items.iva_rate
+CALL brabo_add_column_if_missing(
+  'order_items',
+  'iva_rate',
+  '`iva_rate` decimal(4,2) NULL COMMENT ''Alícuota IVA al momento del pedido'' AFTER `total_price`'
+);
+
+-- Backfill solo si la columna existe
+SET @has_sale_iva := (
+  SELECT COUNT(*) FROM information_schema.COLUMNS
+  WHERE TABLE_SCHEMA = DATABASE()
+    AND TABLE_NAME = 'sale_items'
+    AND COLUMN_NAME = 'iva_rate'
+);
 SET @sql := IF(
-  @has_sale_items > 0,
-  'CALL brabo_add_column_if_missing(''sale_items'', ''iva_rate'', ''`iva_rate` decimal(4,2) NULL COMMENT ''''Alícuota IVA al momento de la venta'''' AFTER `total_price`'')',
-  'SELECT 1'
+  @has_sale_iva > 0,
+  'UPDATE `sale_items` SET `iva_rate` = 21.00 WHERE `iva_rate` IS NULL',
+  'SELECT ''skip sale_items iva backfill'' AS info'
 );
-PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
-
-SET @sql := IF(
-  @has_order_items > 0,
-  'CALL brabo_add_column_if_missing(''order_items'', ''iva_rate'', ''`iva_rate` decimal(4,2) NULL COMMENT ''''Alícuota IVA al momento del pedido'''' AFTER `total_price`'')',
-  'SELECT 1'
-);
-PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
-
-UPDATE `sale_items` SET `iva_rate` = 21.00 WHERE `iva_rate` IS NULL;
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
 DROP PROCEDURE IF EXISTS brabo_add_column_if_missing;
 DROP PROCEDURE IF EXISTS brabo_add_index_if_missing;
