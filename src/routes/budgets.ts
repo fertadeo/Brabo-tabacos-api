@@ -99,7 +99,13 @@ const idParam = [param('id').isInt({ min: 1 }).withMessage('ID inválido')];
 const createValidation = [
   body('client_id').isInt({ min: 1 }).withMessage('client_id requerido'),
   body('items').isArray({ min: 1 }).withMessage('Debe incluir al menos un ítem'),
-  body('valid_until').optional({ values: 'null' }).isISO8601().withMessage('valid_until debe ser fecha ISO'),
+  body('valid_until')
+    .optional({ values: 'null' })
+    .custom((value) => {
+      if (value === null || value === undefined || value === '') return true
+      if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}(T.*)?$/.test(value)) return true
+      throw new Error('valid_until debe ser fecha ISO (YYYY-MM-DD)')
+    }),
   body('notes').optional({ values: 'falsy' }).isString().isLength({ max: 5000 }).withMessage('notes demasiado largo'),
   body('allow_inactive').optional({ values: 'falsy' }).isBoolean().withMessage('allow_inactive booleano'),
   body('exchange_rate')
@@ -119,7 +125,13 @@ const createValidation = [
 const updateValidation = [
   body('client_id').optional({ values: 'falsy' }).isInt({ min: 1 }).withMessage('client_id inválido'),
   body('items').optional().isArray({ min: 1 }).withMessage('items debe ser array no vacío'),
-  body('valid_until').optional({ values: 'null' }).isISO8601().withMessage('valid_until debe ser fecha ISO'),
+  body('valid_until')
+    .optional({ values: 'null' })
+    .custom((value) => {
+      if (value === null || value === undefined || value === '') return true
+      if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}(T.*)?$/.test(value)) return true
+      throw new Error('valid_until debe ser fecha ISO (YYYY-MM-DD)')
+    }),
   body('notes').optional({ values: 'falsy' }).isString().isLength({ max: 5000 }).withMessage('notes demasiado largo'),
   body('allow_inactive').optional({ values: 'falsy' }).isBoolean().withMessage('allow_inactive booleano'),
   body('exchange_rate')

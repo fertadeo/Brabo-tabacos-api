@@ -165,6 +165,7 @@ export class BudgetRepository {
   }
 
   async getBudgetById(id: number): Promise<BudgetWithDetails | null> {
+    // Sin JOIN a repair_orders: en Brabo esa tabla puede no existir (FEATURE_REPARACIONES=off).
     const rows = (await executeQuery(
       `SELECT 
         b.*,
@@ -174,13 +175,9 @@ export class BudgetRepository {
         c.phone AS client_phone,
         c.address AS client_address,
         c.city AS client_city,
-        c.cuil_cuit AS client_cuil_cuit,
-        ro.repair_number AS repair_order_number,
-        ro.status AS repair_order_status,
-        ro.equipment_description AS repair_order_equipment_description
+        c.cuil_cuit AS client_cuil_cuit
        FROM budgets b
        LEFT JOIN clients c ON b.client_id = c.id
-       LEFT JOIN repair_orders ro ON b.repair_order_id = ro.id
        WHERE b.id = ?`,
       [id]
     )) as any[];
@@ -197,9 +194,9 @@ export class BudgetRepository {
       client_address: rows[0].client_address,
       client_city: rows[0].client_city,
       client_cuil_cuit: rows[0].client_cuil_cuit,
-      repair_order_number: rows[0].repair_order_number ?? null,
-      repair_order_status: rows[0].repair_order_status ?? null,
-      repair_order_equipment_description: rows[0].repair_order_equipment_description ?? null
+      repair_order_number: null,
+      repair_order_status: null,
+      repair_order_equipment_description: null
     };
     detail.items = await this.getBudgetItems(id);
     return detail;
@@ -262,12 +259,9 @@ export class BudgetRepository {
         c.address AS client_address,
         c.city AS client_city,
         c.cuil_cuit AS client_cuil_cuit,
-        ro.repair_number AS repair_order_number,
-        ro.status AS repair_order_status,
         (SELECT COUNT(*) FROM budget_items bi WHERE bi.budget_id = b.id) AS item_count
        FROM budgets b
        LEFT JOIN clients c ON b.client_id = c.id
-       LEFT JOIN repair_orders ro ON b.repair_order_id = ro.id
        ${whereClause}
        ORDER BY b.created_at DESC, b.id DESC
        LIMIT ${limitNum} OFFSET ${offsetNum}`,
@@ -285,8 +279,8 @@ export class BudgetRepository {
         client_address: row.client_address,
         client_city: row.client_city,
         client_cuil_cuit: row.client_cuil_cuit,
-        repair_order_number: row.repair_order_number ?? null,
-        repair_order_status: row.repair_order_status ?? null,
+        repair_order_number: null,
+        repair_order_status: null,
         item_count: Number(row.item_count || 0)
       };
     });

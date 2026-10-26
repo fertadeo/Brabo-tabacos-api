@@ -17,10 +17,11 @@ export class BudgetController {
       const result = await this.service.createBudget(data);
       res.status(result.success ? 201 : 400).json(result);
     } catch (e) {
+      const detail = e instanceof Error ? e.message : 'Unknown error';
       res.status(500).json({
         success: false,
-        message: 'Error interno',
-        error: e instanceof Error ? e.message : 'Unknown error',
+        message: detail || 'Error interno al crear presupuesto',
+        error: detail,
         timestamp: new Date().toISOString()
       } as ApiResponse);
     }

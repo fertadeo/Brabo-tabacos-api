@@ -157,6 +157,7 @@ CREATE TABLE IF NOT EXISTS `budgets` (
   `repair_order_id` int DEFAULT NULL,
   `status` enum('draft','sent','approved','rejected','expired') DEFAULT 'draft',
   `total_amount` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `exchange_rate` decimal(12,4) DEFAULT NULL,
   `valid_until` date DEFAULT NULL,
   `notes` text,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -174,16 +175,17 @@ CREATE TABLE IF NOT EXISTS `budgets` (
 CREATE TABLE IF NOT EXISTS `budget_items` (
   `id` int NOT NULL AUTO_INCREMENT,
   `budget_id` int NOT NULL,
-  `product_id` int NOT NULL,
+  `product_id` int DEFAULT NULL,
+  `description` varchar(500) DEFAULT NULL,
   `quantity` int NOT NULL,
   `unit_price` decimal(10,2) NOT NULL,
+  `currency` varchar(3) NOT NULL DEFAULT 'ARS',
   `total_price` decimal(10,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `budget_id` (`budget_id`),
   KEY `product_id` (`product_id`),
-  CONSTRAINT `budget_items_ibfk_1` FOREIGN KEY (`budget_id`) REFERENCES `budgets` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `budget_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
+  CONSTRAINT `budget_items_ibfk_1` FOREIGN KEY (`budget_id`) REFERENCES `budgets` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla brabo_tabacos.budget_items: ~0 rows (aproximadamente)
