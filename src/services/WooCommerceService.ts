@@ -30,10 +30,14 @@ export class WooCommerceService {
   }
 
   /**
-   * Verifica si el servicio está configurado correctamente
+   * WooCommerce activo solo si FEATURE_WOOCOMMERCE está on y hay credenciales.
+   * Brabo retail: feature off → nunca sincronizar aunque queden envs viejos.
    */
   isConfigured(): boolean {
-    return !!(this.baseUrl && this.consumerKey && this.consumerSecret);
+    const wooOn = ['1', 'true', 'yes', 'on'].includes(
+      String(process.env.FEATURE_WOOCOMMERCE || '').trim().toLowerCase()
+    );
+    return wooOn && !!(this.baseUrl && this.consumerKey && this.consumerSecret);
   }
 
   /**

@@ -29,10 +29,11 @@ router.get(
   (req: Request, res: Response) => userController.getUserById(req as any, res)
 );
 
-// POST /api/users - Crear nuevo usuario
-// Permite crear usuarios sin autenticación (público)
+// POST /api/users - Crear nuevo usuario (solo admin/gerencia)
 router.post(
   '/',
+  authenticateJWT,
+  authorizeRoles('admin', 'gerencia'),
   normalizeUserFields, // Normalizar campos antes de validar
   body('username').notEmpty().withMessage('username es requerido'),
   body('email').isEmail().withMessage('email debe ser válido'),

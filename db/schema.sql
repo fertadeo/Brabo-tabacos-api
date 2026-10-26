@@ -194,8 +194,16 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `name` varchar(50) NOT NULL,
   `description` text,
   `is_active` tinyint(1) DEFAULT '1',
+  `woocommerce_id` int DEFAULT NULL COMMENT 'ID de la categoría en WooCommerce',
+  `woocommerce_slug` varchar(100) DEFAULT NULL COMMENT 'Slug de la categoría en WooCommerce',
+  `parent_id` int DEFAULT NULL COMMENT 'Para categorías jerárquicas',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_woocommerce_id` (`woocommerce_id`),
+  KEY `idx_woocommerce_slug` (`woocommerce_slug`),
+  KEY `idx_parent_id` (`parent_id`),
+  CONSTRAINT `fk_category_parent` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla brabo_tabacos.categories: ~0 rows (aproximadamente)
