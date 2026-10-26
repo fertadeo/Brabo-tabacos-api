@@ -20,6 +20,7 @@ import accruedLiabilityRoutes from './accruedLiabilities';
 import apiKeyRoutes from './apiKeys';
 import categoryRoutes from './categories';
 import priceListRoutes from './priceLists';
+import posQuantityDiscountRoutes from './posQuantityDiscounts';
 import saleRoutes from './sales';
 import repairOrderRoutes from './repairOrders';
 import budgetRoutes from './budgets';
@@ -52,6 +53,7 @@ router.use('/accrued-liabilities', accruedLiabilityRoutes);
 router.use('/api-keys', apiKeyRoutes);
 router.use('/categories', categoryRoutes);
 router.use('/price-lists', priceListRoutes);
+router.use('/pos-quantity-discounts', posQuantityDiscountRoutes);
 router.use('/sales', saleRoutes);
 // Reparaciones: off por default en retail simple (Brabo)
 const featureReparaciones = ['1', 'true', 'yes', 'on'].includes(
@@ -105,6 +107,7 @@ router.get('/', (req, res) => {
       create: 'POST /api/products',
       import: 'POST /api/products/import (masiva; solo name obligatorio)',
       update: 'PUT /api/products/:id',
+      pos_quantity_discounts: 'GET|POST|PUT|DELETE /api/pos-quantity-discounts',
       delete: 'DELETE /api/products/:id (soft delete; envía a papelera en WooCommerce si está vinculado)',
       permanent_delete: 'DELETE /api/products/:id/permanent',
       update_stock: 'PUT /api/products/:id/stock',
