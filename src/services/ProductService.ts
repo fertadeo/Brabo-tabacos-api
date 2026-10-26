@@ -1,15 +1,102 @@
 import { ProductRepository } from '../repositories/ProductRepository';
+import { PriceListRepository } from '../repositories/PriceListRepository';
 import { Product, ProductWithCategory, CreateProductData, UpdateProductData } from '../entities/Product';
+import { ProductPricesBySlug } from '../entities/PriceList';
 import { WooCommerceService } from './WooCommerceService';
 import { logger } from '../utils/logger';
 
 export class ProductService {
   private productRepository: ProductRepository;
+  private priceListRepository: PriceListRepository;
   private wooCommerceService: WooCommerceService;
 
   constructor() {
     this.productRepository = new ProductRepository();
+    this.priceListRepository = new PriceListRepository();
     this.wooCommerceService = new WooCommerceService();
+  }
+
+  private async attachPrices<T extends Product>(product: T): Promise<T> {
+    try {
+      const prices = await this.priceListRepository.getPricesForProduct(product.id);
+      return { ...product, prices };
+    } catch (error) {
+      // Tablas aún no migradas: degradar sin romper el catálogo
+      logger.product.error('No se pudieron cargar listas de precio (¿migración pendiente?):', error);
+      return {
+        ...product,
+        prices: {
+          venta_local: Number(product.price) || 0,
+          mayorista: Number(product.price) || 0,
+          revendedor: Number(product.price) || 0
+        }
+      };
+    }
+  }
+
+  private async attachPricesToMany<T extends Product>(products: T[]): Promise<T[]> {
+    if (products.length === 0) return products;
+    try {
+      const map = await this.priceListRepository.getPricesForProducts(products.map((p) => p.id));
+      return products.map((p) => ({
+        ...p,
+        prices: map.get(p.id) || {
+          venta_local: Number(p.price) || 0,
+          mayorista: Number(p.price) || 0,
+          revendedor: Number(p.price) || 0
+        }
+      }));
+    } catch (error) {
+      logger.product.error('No se pudieron cargar listas de precio en lote:', error);
+      return products.map((p) => ({
+        ...p,
+        prices: {
+          venta_local: Number(p.price) || 0,
+          mayorista: Number(p.price) || 0,
+          revendedor: Number(p.price) || 0
+        }
+      }));
+    }
+  }
+
+  private resolvePriceFromPayload(data: {
+    price?: number;
+    prices?: ProductPricesBySlug;
+  }): number {
+    if (data.prices?.venta_local !== undefined && data.prices.venta_local !== null) {
+      const n = Number(data.prices.venta_local);
+      if (Number.isFinite(n)) return n;
+    }
+    if (data.price !== undefined && data.price !== null) {
+      const n = Number(data.price);
+      if (Number.isFinite(n)) return n;
+    }
+    return 0;
+  }
+
+  private async syncProductPrices(
+    productId: number,
+    data: { price?: number; prices?: ProductPricesBySlug },
+    existingPrices?: ProductPricesBySlug
+  ): Promise<number> {
+    let current = existingPrices;
+    if (!current) {
+      try {
+        current = await this.priceListRepository.getPricesForProduct(productId);
+      } catch {
+        current = undefined;
+      }
+    }
+    const fallback = this.resolvePriceFromPayload({
+      price: data.price ?? current?.venta_local,
+      prices: data.prices
+    });
+    const prices: ProductPricesBySlug = {
+      venta_local: data.prices?.venta_local ?? current?.venta_local ?? fallback,
+      mayorista: data.prices?.mayorista ?? current?.mayorista ?? fallback,
+      revendedor: data.prices?.revendedor ?? current?.revendedor ?? fallback
+    };
+    return this.priceListRepository.upsertProductPrices(productId, prices, fallback);
   }
 
   /**
@@ -44,7 +131,9 @@ export class ProductService {
     active_only?: boolean;
     all?: boolean;
   } = {}) {
-    return await this.productRepository.findAll(options);
+    const result = await this.productRepository.findAll(options);
+    const products = await this.attachPricesToMany(result.products);
+    return { ...result, products };
   }
 
   async getStockSummary() {
@@ -52,7 +141,9 @@ export class ProductService {
   }
 
   async getProductById(id: number): Promise<ProductWithCategory | null> {
-    return await this.productRepository.findById(id);
+    const product = await this.productRepository.findById(id);
+    if (!product) return null;
+    return this.attachPrices(product);
   }
 
   /** Todos los códigos (SKU) ya existentes en el ERP. */
@@ -71,21 +162,32 @@ export class ProductService {
       throw new Error('El código del producto ya existe');
     }
 
-    const product = await this.productRepository.create(data);
+    const resolvedPrice = this.resolvePriceFromPayload(data);
+    const { prices: _prices, ...createData } = data;
+    const product = await this.productRepository.create({
+      ...createData,
+      price: resolvedPrice
+    });
+
+    try {
+      await this.syncProductPrices(product.id, { price: resolvedPrice, prices: data.prices });
+    } catch (error) {
+      logger.product.error('Error guardando listas de precio al crear:', error);
+    }
 
     if (syncToWooCommerce && this.wooCommerceService.isConfigured()) {
       try {
         const syncResult = await this.syncProductToWooCommerce(product.id);
         if (syncResult.created) {
           const updated = await this.productRepository.findById(product.id);
-          if (updated) return updated;
+          if (updated) return this.attachPrices(updated);
         }
       } catch (error) {
         logger.product.error('Error sincronizando producto a WooCommerce tras crear:', error);
       }
     }
 
-    return product;
+    return this.attachPrices(product);
   }
 
   async updateProduct(id: number, data: UpdateProductData, syncToWooCommerce: boolean = false): Promise<Product> {
@@ -152,20 +254,57 @@ export class ProductService {
 
     logger.product.update(`Producto id=${id}: aplicando actualización.`, Object.keys(data).filter(k => data[k as keyof UpdateProductData] !== undefined));
 
-    const updated = await this.productRepository.update(id, data);
+    const { prices: incomingPrices, ...rest } = data;
+    const updatePayload: UpdateProductData = { ...rest };
+    if (incomingPrices !== undefined || data.price !== undefined) {
+      updatePayload.price = this.resolvePriceFromPayload({
+        price: data.price ?? existingProduct.price,
+        prices: incomingPrices
+      });
+    }
+
+    const hasProductFields = Object.keys(updatePayload).some(
+      (k) => updatePayload[k as keyof UpdateProductData] !== undefined
+    );
+
+    let updated: Product;
+    if (hasProductFields) {
+      updated = await this.productRepository.update(id, updatePayload);
+    } else {
+      updated = existingProduct;
+    }
+
+    if (incomingPrices !== undefined || data.price !== undefined) {
+      try {
+        const existingPrices = (existingProduct as Product).prices;
+        const synced = await this.syncProductPrices(
+          id,
+          {
+            price: updatePayload.price ?? existingProduct.price,
+            prices: incomingPrices
+          },
+          existingPrices
+        );
+        if (Number(updated.price) !== synced) {
+          updated = await this.productRepository.update(id, { price: synced });
+        }
+      } catch (error) {
+        logger.product.error('Error guardando listas de precio al actualizar:', error);
+      }
+    }
 
     if (syncToWooCommerce && existingProduct.woocommerce_id && this.wooCommerceService.isConfigured()) {
       try {
         logger.product.sync(`Producto id=${id}: iniciando sync a WooCommerce (woocommerce_id=${existingProduct.woocommerce_id}).`);
         await this.syncProductToWooCommerce(id);
         const reloaded = await this.productRepository.findById(id);
-        if (reloaded) return reloaded;
+        if (reloaded) return this.attachPrices(reloaded);
       } catch (error) {
         logger.product.error('Error sincronizando producto a WooCommerce tras actualizar:', error);
       }
     }
 
-    return updated;
+    return this.attachPrices(updated);
   }
 
   async updateStock(id: number, stock: number, operation: 'set' | 'add' | 'subtract' = 'set'): Promise<Product> {

@@ -1,3 +1,5 @@
+import type { ProductPricesBySlug } from './PriceList';
+
 export interface Product {
   id: number;
   code: string;
@@ -5,6 +7,8 @@ export interface Product {
   description?: string | null;
   category_id?: number | null;
   price: number;
+  /** Precios por lista (venta_local, mayorista, revendedor). */
+  prices?: ProductPricesBySlug;
   /** Alícuota IVA: 21, 10.5 o 0 (precio con IVA incluido) */
   iva_rate?: number;
   stock: number;
@@ -45,6 +49,8 @@ export interface CreateProductData {
   description?: string | null;
   category_id?: number | null;
   price: number;
+  /** Si se envía, upsert en product_prices; products.price = venta_local. */
+  prices?: ProductPricesBySlug;
   iva_rate?: number;
   stock?: number;
   min_stock?: number;

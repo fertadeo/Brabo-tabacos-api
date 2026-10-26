@@ -13,7 +13,25 @@ const productPricingController = new ProductPricingController();
 const createProductValidation = [
   body('code').notEmpty().withMessage('Código es requerido'),
   body('name').notEmpty().withMessage('Nombre es requerido'),
-  body('price').isNumeric().withMessage('Precio debe ser numérico'),
+  body('price')
+    .optional()
+    .isNumeric()
+    .withMessage('Precio debe ser numérico'),
+  body('prices').optional().isObject().withMessage('prices debe ser un objeto'),
+  body('prices.venta_local').optional().isNumeric().withMessage('prices.venta_local debe ser numérico'),
+  body('prices.mayorista').optional().isNumeric().withMessage('prices.mayorista debe ser numérico'),
+  body('prices.revendedor').optional().isNumeric().withMessage('prices.revendedor debe ser numérico'),
+  body().custom((_, { req }) => {
+    const hasPrice = req.body?.price !== undefined && req.body?.price !== null && req.body?.price !== '';
+    const hasLocal =
+      req.body?.prices?.venta_local !== undefined &&
+      req.body?.prices?.venta_local !== null &&
+      req.body?.prices?.venta_local !== '';
+    if (!hasPrice && !hasLocal) {
+      throw new Error('Se requiere price o prices.venta_local');
+    }
+    return true;
+  }),
   body('iva_rate')
     .optional()
     .custom((value) => {
@@ -46,6 +64,10 @@ const updateProductValidation = [
   body('code').optional().notEmpty().withMessage('Código no puede estar vacío'),
   body('name').optional().notEmpty().withMessage('Nombre no puede estar vacío'),
   body('price').optional().isNumeric().withMessage('Precio debe ser numérico'),
+  body('prices').optional().isObject().withMessage('prices debe ser un objeto'),
+  body('prices.venta_local').optional().isNumeric().withMessage('prices.venta_local debe ser numérico'),
+  body('prices.mayorista').optional().isNumeric().withMessage('prices.mayorista debe ser numérico'),
+  body('prices.revendedor').optional().isNumeric().withMessage('prices.revendedor debe ser numérico'),
   body('iva_rate')
     .optional()
     .custom((value) => {

@@ -19,6 +19,7 @@ import accruedExpenseRoutes from './accruedExpenses';
 import accruedLiabilityRoutes from './accruedLiabilities';
 import apiKeyRoutes from './apiKeys';
 import categoryRoutes from './categories';
+import priceListRoutes from './priceLists';
 import saleRoutes from './sales';
 import repairOrderRoutes from './repairOrders';
 import budgetRoutes from './budgets';
@@ -50,6 +51,7 @@ router.use('/accrued-expenses', accruedExpenseRoutes);
 router.use('/accrued-liabilities', accruedLiabilityRoutes);
 router.use('/api-keys', apiKeyRoutes);
 router.use('/categories', categoryRoutes);
+router.use('/price-lists', priceListRoutes);
 router.use('/sales', saleRoutes);
 // Reparaciones: off por default en retail simple (Brabo)
 const featureReparaciones = ['1', 'true', 'yes', 'on'].includes(
@@ -87,6 +89,7 @@ router.get('/', (req, res) => {
       accruedLiabilities: '/api/accrued-liabilities',
       apiKeys: '/api/api-keys',
       categories: '/api/categories',
+      priceLists: '/api/price-lists',
       ...(featureReparaciones ? { repairOrders: '/api/repair-orders' } : {}),
       // Future routes will be added here
       stock: '/api/products/stock (available)',

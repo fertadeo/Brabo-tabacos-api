@@ -169,6 +169,7 @@ export class ProductController {
         barcode,
         qr_code,
         price,
+        prices,
         iva_rate,
         stock = 0, 
         min_stock = 0, 
@@ -181,6 +182,13 @@ export class ProductController {
         is_active,
         sync_to_woocommerce = false
       } = req.body;
+
+      const resolvedPrice =
+        price !== undefined && price !== null && price !== ''
+          ? Number(price)
+          : prices?.venta_local !== undefined
+            ? Number(prices.venta_local)
+            : 0;
       
       const newProduct = await this.productService.createProduct({
         code,
@@ -191,7 +199,17 @@ export class ProductController {
         woocommerce_image_ids: woocommerce_image_ids ?? null,
         barcode: barcode ?? null,
         qr_code: qr_code ?? null,
-        price,
+        price: resolvedPrice,
+        prices: prices
+          ? {
+              venta_local:
+                prices.venta_local !== undefined ? Number(prices.venta_local) : resolvedPrice,
+              mayorista:
+                prices.mayorista !== undefined ? Number(prices.mayorista) : resolvedPrice,
+              revendedor:
+                prices.revendedor !== undefined ? Number(prices.revendedor) : resolvedPrice
+            }
+          : undefined,
         iva_rate,
         stock,
         min_stock,
@@ -252,6 +270,7 @@ export class ProductController {
         barcode,
         qr_code,
         price,
+        prices,
         iva_rate,
         stock, 
         min_stock, 
@@ -274,7 +293,17 @@ export class ProductController {
         woocommerce_image_ids: woocommerce_image_ids === undefined ? undefined : (woocommerce_image_ids ?? null),
         barcode: barcode === undefined ? undefined : (barcode ?? null),
         qr_code: qr_code === undefined ? undefined : (qr_code ?? null),
-        price,
+        price: price === undefined ? undefined : Number(price),
+        prices: prices
+          ? {
+              venta_local:
+                prices.venta_local !== undefined ? Number(prices.venta_local) : undefined,
+              mayorista:
+                prices.mayorista !== undefined ? Number(prices.mayorista) : undefined,
+              revendedor:
+                prices.revendedor !== undefined ? Number(prices.revendedor) : undefined
+            }
+          : undefined,
         iva_rate,
         stock,
         min_stock,

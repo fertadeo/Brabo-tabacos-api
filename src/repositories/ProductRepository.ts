@@ -340,9 +340,11 @@ export class ProductRepository {
   async update(id: number, data: UpdateProductData): Promise<Product> {
     const fields: string[] = [];
     const values = [];
-    
+    // No son columnas de products
+    const skipKeys = new Set(['prices']);
+
     Object.entries(data).forEach(([key, value]) => {
-      if (value !== undefined) {
+      if (value !== undefined && !skipKeys.has(key)) {
         fields.push(`${key} = ?`);
         // Convertir arrays a JSON string
         if (key === 'images' && Array.isArray(value)) {
