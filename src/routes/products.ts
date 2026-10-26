@@ -191,6 +191,13 @@ router.get('/:id',
   productController.getProductById.bind(productController)
 );
 
+// Importación masiva (tolerante a datos faltantes): admin y gerencia
+// Debe ir antes de /:id
+router.post('/import',
+  authorizeRoles(...PRODUCT_MANAGE_ROLES),
+  productController.importProducts.bind(productController)
+);
+
 // Crear/Actualizar/Eliminar productos: admin y gerencia
 router.post('/', 
   authorizeRoles(...PRODUCT_MANAGE_ROLES),

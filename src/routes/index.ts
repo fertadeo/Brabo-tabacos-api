@@ -103,6 +103,7 @@ router.get('/', (req, res) => {
       list: 'GET /api/products',
       get_by_id: 'GET /api/products/:id',
       create: 'POST /api/products',
+      import: 'POST /api/products/import (masiva; solo name obligatorio)',
       update: 'PUT /api/products/:id',
       delete: 'DELETE /api/products/:id (soft delete; envía a papelera en WooCommerce si está vinculado)',
       permanent_delete: 'DELETE /api/products/:id/permanent',

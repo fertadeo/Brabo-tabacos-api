@@ -4,14 +4,21 @@ import { ApiResponse, Product } from '../types';
 import { validationResult } from 'express-validator';
 import { ProductService } from '../services/ProductService';
 import { BarcodeLookupService } from '../services/BarcodeLookupService';
+import {
+  ProductImportService,
+  ProductImportItemInput,
+  ProductImportOptions
+} from '../services/ProductImportService';
 
 export class ProductController {
   private productService: ProductService;
   private barcodeLookupService: BarcodeLookupService;
+  private productImportService: ProductImportService;
 
   constructor() {
     this.productService = new ProductService();
     this.barcodeLookupService = new BarcodeLookupService();
+    this.productImportService = new ProductImportService();
   }
 
   // GET /api/products - Get all products with pagination and filters
@@ -830,6 +837,78 @@ export class ProductController {
       const response: ApiResponse = {
         success: false,
         message: 'Error al descartar datos',
+        error: error instanceof Error ? error.message : 'Unknown error',
+        timestamp: new Date().toISOString()
+      };
+      res.status(500).json(response);
+    }
+  }
+
+  /**
+   * POST /api/products/import
+   * Importación masiva tolerante: solo el nombre es obligatorio.
+   * Código, precios, categoría, stock e IVA se completan o quedan en borrador.
+   */
+  public async importProducts(req: Request, res: Response): Promise<void> {
+    try {
+      const items = (req.body?.items ?? req.body?.products) as ProductImportItemInput[] | undefined;
+      if (!Array.isArray(items) || items.length === 0) {
+        const response: ApiResponse = {
+          success: false,
+          message: 'Se requiere un array items (o products) con al menos una fila',
+          timestamp: new Date().toISOString()
+        };
+        res.status(400).json(response);
+        return;
+      }
+
+      if (items.length > 5000) {
+        const response: ApiResponse = {
+          success: false,
+          message: 'Máximo 5000 productos por importación',
+          timestamp: new Date().toISOString()
+        };
+        res.status(400).json(response);
+        return;
+      }
+
+      const options: ProductImportOptions = {
+        dry_run: req.body?.dry_run === true || req.body?.dry_run === 'true' || req.body?.dry_run === 1,
+        create_missing_categories:
+          req.body?.create_missing_categories === undefined
+            ? true
+            : req.body.create_missing_categories === true ||
+              req.body.create_missing_categories === 'true' ||
+              req.body.create_missing_categories === 1,
+        on_duplicate_code: req.body?.on_duplicate_code === 'update' ? 'update' : 'skip',
+        code_prefix: typeof req.body?.code_prefix === 'string' ? req.body.code_prefix : 'IMP',
+        activate_without_price:
+          req.body?.activate_without_price === true ||
+          req.body?.activate_without_price === 'true' ||
+          req.body?.activate_without_price === 1,
+        default_iva_rate:
+          req.body?.default_iva_rate !== undefined && req.body?.default_iva_rate !== null
+            ? Number(req.body.default_iva_rate)
+            : 21
+      };
+
+      const result = await this.productImportService.importProducts(items, options);
+
+      const response: ApiResponse = {
+        success: true,
+        message: options.dry_run
+          ? `Simulación: ${result.created} crearían, ${result.updated} actualizarían, ${result.skipped} omitidos, ${result.errors} errores`
+          : `Importación: ${result.created} creados, ${result.updated} actualizados, ${result.skipped} omitidos, ${result.errors} errores`,
+        data: result,
+        timestamp: new Date().toISOString()
+      };
+
+      res.status(200).json(response);
+    } catch (error) {
+      console.error('Import products error:', error);
+      const response: ApiResponse = {
+        success: false,
+        message: 'Error en importación masiva de productos',
         error: error instanceof Error ? error.message : 'Unknown error',
         timestamp: new Date().toISOString()
       };
