@@ -81,6 +81,12 @@ const orderFiltersValidation = [
     .isIn(['sin_remito', 'remito_generado', 'remito_despachado', 'remito_entregado']),
   query('date_from').optional().isISO8601(),
   query('date_to').optional().isISO8601(),
+  query('delivery_date')
+    .optional()
+    .matches(/^\d{4}-\d{2}-\d{2}/)
+    .withMessage('delivery_date inválida (YYYY-MM-DD)'),
+  query('delivery_date_from').optional().matches(/^\d{4}-\d{2}-\d{2}/),
+  query('delivery_date_to').optional().matches(/^\d{4}-\d{2}-\d{2}/),
   query('stock_reserved').optional().isBoolean(),
   query('has_remito').optional().isBoolean(),
   query('page').optional().isInt({ min: 1 }),

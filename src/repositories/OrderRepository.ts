@@ -385,6 +385,21 @@ export class OrderRepository {
         params.push(filters.date_to);
       }
 
+      if (filters.delivery_date) {
+        whereClause += ' AND DATE(o.delivery_date) = DATE(?)';
+        params.push(filters.delivery_date);
+      }
+
+      if (filters.delivery_date_from) {
+        whereClause += ' AND DATE(o.delivery_date) >= DATE(?)';
+        params.push(filters.delivery_date_from);
+      }
+
+      if (filters.delivery_date_to) {
+        whereClause += ' AND DATE(o.delivery_date) <= DATE(?)';
+        params.push(filters.delivery_date_to);
+      }
+
       if (filters.stock_reserved !== undefined) {
         whereClause += ' AND o.stock_reserved = ?';
         params.push(filters.stock_reserved);

@@ -181,6 +181,10 @@ export interface OrderFilters {
   remito_status?: string;
   date_from?: string;
   date_to?: string;
+  /** Fecha exacta de entrega (YYYY-MM-DD) */
+  delivery_date?: string;
+  delivery_date_from?: string;
+  delivery_date_to?: string;
   stock_reserved?: boolean;
   has_remito?: boolean;
   page?: number;
