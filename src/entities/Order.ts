@@ -6,7 +6,8 @@ export interface Order {
   id: number;
   order_number: string;
   woocommerce_order_id?: number | null;
-  canal_venta?: string | null; // 'woocommerce', 'local', etc.
+  /** 'woocommerce' | 'local' | 'preventa' (toma en calle / repartidor) */
+  canal_venta?: string | null;
   json?: any | null; // JSON completo con todos los datos de la orden
   client_id: number;
   status: 'pendiente_preparacion' | 'listo_despacho' | 'pagado' | 'aprobado' | 'en_proceso' | 'completado' | 'cancelado';
@@ -95,7 +96,8 @@ export interface CreateOrderData {
   client_id: number;
   order_number?: string; // Número de pedido personalizado (ej: de WooCommerce)
   woocommerce_order_id?: number; // ID del pedido en WooCommerce (para evitar duplicados)
-  canal_venta?: string; // 'woocommerce', 'local', etc.
+  /** 'woocommerce' | 'local' | 'preventa' */
+  canal_venta?: string;
   json?: any; // JSON completo con todos los datos de la orden
   status?: 'pendiente_preparacion' | 'listo_despacho' | 'pagado' | 'aprobado' | 'en_proceso' | 'completado' | 'cancelado';
   sync_to_woocommerce?: boolean; // ⭐ NUEVO: Flag para controlar sincronización (por defecto true)
@@ -178,6 +180,8 @@ export interface UpdateOrderItemData {
 export interface OrderFilters {
   status?: string;
   client_id?: number;
+  /** 'woocommerce' | 'local' | 'preventa' */
+  canal_venta?: string;
   remito_status?: string;
   date_from?: string;
   date_to?: string;

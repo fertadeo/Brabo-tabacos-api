@@ -52,9 +52,17 @@ export class OrderService {
 
       // ⭐ NUEVO: Sincronizar con WooCommerce si está configurado y no viene de WooCommerce
       // Verificar si sync_to_woocommerce está en los datos (flag para evitar bucles)
-      const syncToWooCommerce = (data as any).sync_to_woocommerce !== false; // Por defecto true si no se especifica
+      // Preventa de calle / local ERP: no empujar a WooCommerce salvo flag explícito
+      const isStreetOrLocal =
+        data.canal_venta === 'preventa' || data.canal_venta === 'local';
+      const syncToWooCommerce =
+        (data as any).sync_to_woocommerce === true
+          ? true
+          : (data as any).sync_to_woocommerce === false
+            ? false
+            : !isStreetOrLocal;
       // Solo sincronizar si:
-      // 1. sync_to_woocommerce es true (o no está definido)
+      // 1. sync_to_woocommerce es true
       // 2. El pedido NO viene de WooCommerce (canal_venta !== 'woocommerce')
       // 3. WooCommerce está configurado
       if (syncToWooCommerce && 

@@ -370,6 +370,11 @@ export class OrderRepository {
         params.push(filters.client_id);
       }
 
+      if (filters.canal_venta) {
+        whereClause += ' AND o.canal_venta = ?';
+        params.push(filters.canal_venta);
+      }
+
       if (filters.remito_status) {
         whereClause += ' AND o.remito_status = ?';
         params.push(filters.remito_status);

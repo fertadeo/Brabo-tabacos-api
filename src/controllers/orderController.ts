@@ -136,6 +136,9 @@ export class OrderController {
       const filters: OrderFilters = {
         status: req.query.status as string,
         client_id: req.query.client_id ? parseInt(req.query.client_id as string, 10) : undefined,
+        canal_venta: req.query.canal_venta
+          ? String(req.query.canal_venta).trim()
+          : undefined,
         remito_status: req.query.remito_status as string,
         date_from: req.query.date_from as string,
         date_to: req.query.date_to as string,
