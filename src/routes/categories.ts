@@ -3,9 +3,13 @@ import { CategoryController } from '../controllers/categoryController';
 import { body, param } from 'express-validator';
 import { validate } from '../middleware/validation';
 import { authenticateApiKey } from '../middleware/auth';
+import { authenticateJWT, authorizeRoles } from '../middleware/jwt';
 
 const router = Router();
 const categoryController = new CategoryController();
+
+const CATEGORY_VIEW_ROLES = ['admin', 'gerencia', 'ventas', 'logistica', 'finanzas'] as const;
+const CATEGORY_MANAGE_ROLES = ['admin', 'gerencia'] as const;
 
 const createCategoryValidation = [
   body('name').notEmpty().withMessage('name es requerido'),
@@ -32,47 +36,58 @@ const syncCategoriesValidation = [
   body('categories.*.slug').notEmpty().withMessage('Cada categoría debe tener un slug')
 ];
 
-// Rutas públicas (con autenticación API Key)
-router.get('/', 
-  authenticateApiKey,
+// CRUD ERP: JWT (sin API key)
+router.get(
+  '/',
+  authenticateJWT,
+  authorizeRoles(...CATEGORY_VIEW_ROLES),
   categoryController.getAllCategories.bind(categoryController)
 );
 
-router.get('/:id',
-  authenticateApiKey,
+router.get(
+  '/:id',
+  authenticateJWT,
+  authorizeRoles(...CATEGORY_VIEW_ROLES),
   param('id').isInt(),
   validate([param('id')]),
   categoryController.getCategoryById.bind(categoryController)
 );
 
-router.post('/',
-  authenticateApiKey,
+router.post(
+  '/',
+  authenticateJWT,
+  authorizeRoles(...CATEGORY_MANAGE_ROLES),
   validate(createCategoryValidation),
   categoryController.createCategory.bind(categoryController)
 );
 
-router.put('/:id',
-  authenticateApiKey,
+router.put(
+  '/:id',
+  authenticateJWT,
+  authorizeRoles(...CATEGORY_MANAGE_ROLES),
   validate(updateCategoryValidation),
   categoryController.updateCategory.bind(categoryController)
 );
 
-router.delete('/:id',
-  authenticateApiKey,
+router.delete(
+  '/:id',
+  authenticateJWT,
+  authorizeRoles(...CATEGORY_MANAGE_ROLES),
   param('id').isInt().withMessage('ID debe ser un número'),
   validate([param('id')]),
   categoryController.deleteCategory.bind(categoryController)
 );
 
-// Ruta para sincronización desde WooCommerce
-router.post('/sync/woocommerce',
+// Integraciones WooCommerce / n8n: siguen con API Key
+router.post(
+  '/sync/woocommerce',
   authenticateApiKey,
   validate(syncCategoriesValidation),
   categoryController.syncFromWooCommerce.bind(categoryController)
 );
 
-// Webhook para cambios (puede ser llamado por n8n)
-router.post('/webhook',
+router.post(
+  '/webhook',
   authenticateApiKey,
   categoryController.webhookCategoryChange.bind(categoryController)
 );
