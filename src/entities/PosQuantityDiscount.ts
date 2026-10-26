@@ -1,8 +1,17 @@
+export type PosDiscountThresholdType = 'quantity' | 'amount';
+export type PosDiscountType = 'percent' | 'fixed';
+
 export interface PosQuantityDiscount {
   id: number;
   name: string;
+  /** quantity = por unidades; amount = por importe de línea (lista × cant) */
+  threshold_type: PosDiscountThresholdType;
   min_quantity: number;
+  min_amount: number;
+  /** percent = %; fixed = monto fijo por unidad */
+  discount_type: PosDiscountType;
   discount_percent: number;
+  discount_amount: number;
   price_list_slug: string | null;
   is_active: boolean;
   sort_order: number;
@@ -12,8 +21,12 @@ export interface PosQuantityDiscount {
 
 export interface CreatePosQuantityDiscountData {
   name: string;
-  min_quantity: number;
-  discount_percent: number;
+  threshold_type?: PosDiscountThresholdType;
+  min_quantity?: number;
+  min_amount?: number;
+  discount_type?: PosDiscountType;
+  discount_percent?: number;
+  discount_amount?: number;
   price_list_slug?: string | null;
   is_active?: boolean;
   sort_order?: number;

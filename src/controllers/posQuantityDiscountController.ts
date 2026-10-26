@@ -36,10 +36,17 @@ export class PosQuantityDiscountController {
     try {
       const created = await this.service.create({
         name: req.body.name,
-        min_quantity: Number(req.body.min_quantity),
-        discount_percent: Number(req.body.discount_percent),
+        threshold_type: req.body.threshold_type,
+        min_quantity: req.body.min_quantity !== undefined ? Number(req.body.min_quantity) : undefined,
+        min_amount: req.body.min_amount !== undefined ? Number(req.body.min_amount) : undefined,
+        discount_type: req.body.discount_type,
+        discount_percent:
+          req.body.discount_percent !== undefined ? Number(req.body.discount_percent) : undefined,
+        discount_amount:
+          req.body.discount_amount !== undefined ? Number(req.body.discount_amount) : undefined,
         price_list_slug: req.body.price_list_slug ?? null,
-        is_active: req.body.is_active !== false && req.body.is_active !== 0 && req.body.is_active !== '0',
+        is_active:
+          req.body.is_active !== false && req.body.is_active !== 0 && req.body.is_active !== '0',
         sort_order: req.body.sort_order !== undefined ? Number(req.body.sort_order) : 0
       });
       const response: ApiResponse = {
@@ -58,7 +65,13 @@ export class PosQuantityDiscountController {
         error: msg,
         timestamp: new Date().toISOString()
       };
-      res.status(msg.includes('obligatorio') || msg.includes('debe') || msg.includes('inválido') ? 400 : 500).json(response);
+      res
+        .status(
+          msg.includes('obligatorio') || msg.includes('debe') || msg.includes('inválido') || msg.includes('Para ')
+            ? 400
+            : 500
+        )
+        .json(response);
     }
   }
 
@@ -75,8 +88,16 @@ export class PosQuantityDiscountController {
       }
       const payload: Record<string, unknown> = {};
       if (req.body.name !== undefined) payload.name = req.body.name;
+      if (req.body.threshold_type !== undefined) payload.threshold_type = req.body.threshold_type;
       if (req.body.min_quantity !== undefined) payload.min_quantity = Number(req.body.min_quantity);
-      if (req.body.discount_percent !== undefined) payload.discount_percent = Number(req.body.discount_percent);
+      if (req.body.min_amount !== undefined) payload.min_amount = Number(req.body.min_amount);
+      if (req.body.discount_type !== undefined) payload.discount_type = req.body.discount_type;
+      if (req.body.discount_percent !== undefined) {
+        payload.discount_percent = Number(req.body.discount_percent);
+      }
+      if (req.body.discount_amount !== undefined) {
+        payload.discount_amount = Number(req.body.discount_amount);
+      }
       if (req.body.price_list_slug !== undefined) payload.price_list_slug = req.body.price_list_slug;
       if (req.body.is_active !== undefined) {
         payload.is_active =
@@ -98,7 +119,11 @@ export class PosQuantityDiscountController {
     } catch (error) {
       console.error('PUT /api/pos-quantity-discounts/:id error:', error);
       const msg = error instanceof Error ? error.message : 'Unknown error';
-      const status = msg.includes('no encontrado') ? 404 : msg.includes('debe') || msg.includes('inválido') || msg.includes('obligatorio') ? 400 : 500;
+      const status = msg.includes('no encontrado')
+        ? 404
+        : msg.includes('debe') || msg.includes('inválido') || msg.includes('obligatorio')
+          ? 400
+          : 500;
       res.status(status).json({
         success: false,
         message: 'Error al actualizar descuento',
