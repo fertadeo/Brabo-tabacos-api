@@ -481,13 +481,26 @@ export class OrderService {
   }
 
   private async validateStatusTransition(currentStatus: string, newStatus: string): Promise<void> {
+    // Preventa / repartidor: libre entre pendiente_preparacion ↔ en_proceso ↔ completado
     const validTransitions: Record<string, string[]> = {
-      'pendiente_preparacion': ['listo_despacho', 'aprobado', 'en_proceso', 'cancelado'],
-      'aprobado': ['listo_despacho', 'en_proceso', 'cancelado'],
-      'en_proceso': ['listo_despacho', 'completado', 'cancelado'],
-      'listo_despacho': ['completado', 'cancelado'],
-      'completado': [],
-      'cancelado': []
+      pendiente_preparacion: [
+        'listo_despacho',
+        'aprobado',
+        'en_proceso',
+        'completado',
+        'cancelado',
+      ],
+      aprobado: ['listo_despacho', 'en_proceso', 'cancelado'],
+      en_proceso: [
+        'pendiente_preparacion',
+        'listo_despacho',
+        'completado',
+        'cancelado',
+      ],
+      listo_despacho: ['completado', 'cancelado'],
+      completado: ['en_proceso', 'pendiente_preparacion'],
+      cancelado: [],
+      pagado: ['listo_despacho', 'completado', 'cancelado'],
     };
 
     if (!validTransitions[currentStatus]?.includes(newStatus)) {
