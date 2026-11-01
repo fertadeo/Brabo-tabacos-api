@@ -62,6 +62,17 @@ sudo -E env RECREATE_DB=true DB_PASSWORD='...' JWT_SECRET='...' CORS_ORIGIN='...
   bash scripts/bootstrap-prod.sh
 ```
 
+### Actualizar en VPS (git pull + build + PM2)
+
+```bash
+cd /var/www/brabo-tabacos-api   # o ~/Brabo-tabacos-api
+sudo bash scripts/deploy-update.sh
+```
+
+Hace: `git pull` → `npm ci` solo si cambió el lock / no hay `node_modules` → `npm run build` → `pm2 restart brabo-tabacos-api` (PM2 de root).
+
+Forzar reinstall de deps: `sudo FORCE_NPM=1 bash scripts/deploy-update.sh`
+
 ### PM2: Cannot find module `dist/index.js`
 
 Causa típica: `npm ci` sin devDeps (TypeScript) → no hay `dist/`. El bootstrap actual falla antes de PM2 si falta el entry. Fix manual:
@@ -70,9 +81,9 @@ Causa típica: `npm ci` sin devDeps (TypeScript) → no hay `dist/`. El bootstra
 cd /var/www/brabo-tabacos-api
 sudo git pull
 sudo npm ci --include=dev && sudo npm run build
-test -f dist/index.js && sudo pm2 restart brabo-tabacos-api
+test -f dist/index.js && sudo PM2_HOME=/root/.pm2 pm2 restart brabo-tabacos-api
 # Listar SIEMPRE el PM2 de root (no el de fenecstudio):
-sudo pm2 list
+sudo PM2_HOME=/root/.pm2 pm2 list
 ```
 
 Brabo corre en el PM2 de **root** (`PM2_HOME=/root/.pm2`). `pm2 list` sin sudo muestra otro daemon (p.ej. usuario `fenecstudio`) y no vas a ver la app.
