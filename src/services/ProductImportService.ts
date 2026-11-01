@@ -29,8 +29,13 @@ export interface ProductImportOptions {
   on_duplicate_code?: 'skip' | 'update';
   /** Prefijo para códigos autogenerados. Default IMP. */
   code_prefix?: string;
-  /** Si no hay ningún precio, activar igual. Default false (queda borrador). */
+  /** Si no hay ningún precio, activar igual. Default false (queda inactivo). */
   activate_without_price?: boolean;
+  /**
+   * Forzar pestaña Borrador: is_active=true, stock=0, allow_backorders=false.
+   * Ignora is_active/stock/allow_backorders del archivo. Default false.
+   */
+  import_as_draft?: boolean;
   /** IVA por defecto. Default 21. */
   default_iva_rate?: number;
 }
@@ -144,6 +149,7 @@ export class ProductImportService {
     const onDuplicate = options.on_duplicate_code === 'update' ? 'update' : 'skip';
     const codePrefix = (options.code_prefix || 'IMP').replace(/[^A-Za-z0-9_-]/g, '').toUpperCase() || 'IMP';
     const activateWithoutPrice = options.activate_without_price === true;
+    const importAsDraft = options.import_as_draft === true;
     const defaultIva = toNum(options.default_iva_rate) ?? 21;
 
     const existingCodes = await this.productRepository.findAllCodes();
@@ -259,21 +265,31 @@ export class ProductImportService {
         }
 
         const categoryId = await resolveCategoryId(item, warnings);
-        const stock = toNum(item.stock) ?? 0;
+        let stock = toNum(item.stock) ?? 0;
         const minStock = toNum(item.min_stock) ?? 0;
         const maxStock = toNum(item.max_stock) ?? 1000;
         const iva = toNum(item.iva_rate) ?? defaultIva;
-        const allowBackorders = item.allow_backorders === true;
+        let allowBackorders = item.allow_backorders === true;
 
         let isActive: boolean;
-        if (item.is_active !== undefined && item.is_active !== null) {
+        if (importAsDraft) {
+          // Misma regla que la pestaña Borrador del ERP: activo + stock 0 + sin encargo
+          if (stock > 0) {
+            warnings.push(`Stock ${stock} omitido: importación como borrador (stock=0)`);
+          }
+          stock = 0;
+          allowBackorders = false;
+          isActive = true;
+          warnings.push('Importado como borrador (revisar precios antes de publicar)');
+        } else if (item.is_active !== undefined && item.is_active !== null) {
           isActive = Boolean(item.is_active);
         } else if (!hasAnyPrice && !activateWithoutPrice) {
           isActive = false;
           warnings.push('Producto inactivo (sin precio)');
         } else if (stock === 0 && !allowBackorders) {
-          isActive = false;
-          warnings.push('Producto inactivo (stock 0 sin venta por encargo)');
+          // stock 0 sin encargo → pestaña Borrador (activo)
+          isActive = true;
+          warnings.push('Producto en borrador (stock 0 sin venta por encargo)');
         } else {
           isActive = true;
         }

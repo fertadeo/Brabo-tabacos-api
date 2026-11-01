@@ -886,6 +886,10 @@ export class ProductController {
           req.body?.activate_without_price === true ||
           req.body?.activate_without_price === 'true' ||
           req.body?.activate_without_price === 1,
+        import_as_draft:
+          req.body?.import_as_draft === true ||
+          req.body?.import_as_draft === 'true' ||
+          req.body?.import_as_draft === 1,
         default_iva_rate:
           req.body?.default_iva_rate !== undefined && req.body?.default_iva_rate !== null
             ? Number(req.body.default_iva_rate)
